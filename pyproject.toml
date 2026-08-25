@@ -1,0 +1,12 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "model-lab"
+version = "0.1.0"
+description = "A learning-first generative model research lab."
+readme = "README.md"
+
+[tool.setuptools.packages.find]
+where = ["src"]
