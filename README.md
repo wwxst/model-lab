@@ -20,10 +20,27 @@ Model Lab 是一个从零学习、实现和训练生成式模型的研发项目�
 
 - 不调用 OpenAI、Qwen、DeepSeek 等第三方大模型 API 来实现模型核心。
 - 不使用 Hugging Face Transformers 替代核心模型实现。
-- 数值计算使用 PyTorch；PyTorch 的具体版本和开发工具链将在后续 Commit 中确定。
+- 数值计算使用 PyTorch 2.13.x；Python 和开发工具链的稳定版本由本 Commit 固定。
 
 本项目不是 Agent、Harness、RAG 或第三方模型 API 集成项目。
 
+## 开发环境基础
+
+Python 是运行项目代码的编程语言和执行环境。本 Commit 要求 Python `>=3.14,<3.15`，并使用 `.venv` 隔离项目依赖。
+
+PyTorch 是数值计算和自动求导库。在本项目中，它提供 Tensor（张量）、梯度计算以及 CPU/GPU 数值计算能力；它不提供已经训练好的本项目模型。
+
+CPU 擅长通用、顺序性较强的计算；GPU 包含更多适合并行数值计算的处理单元。CUDA 是 PyTorch 在 NVIDIA GPU 上执行计算时使用的软件平台。没有 CUDA 或 GPU 时，项目仍然可以使用 CPU 完成基础验证。
+
+我们没有在本项目中自己实现 GPU 矩阵计算，因为那属于底层数值计算和硬件驱动基础，不是当前学习模型算法的目标。使用 PyTorch 仍然属于从零实现模型：我们自己编写模型算法、结构和训练逻辑，只把 Tensor、自动求导和 CPU/GPU 计算交给 PyTorch；这不同于调用别人已经训练好的大模型或 API。
+
+安装开发环境：
+
+```text
+py -3.14 -m venv .venv
+.venv\Scripts\python.exe -m pip install -e ".[dev]"
+```
+
 ## 项目状态
 
-Repository Foundation（仓库基础）。当前 Commit 只建立仓库结构、开发规则和目标文档，尚未实现 Tokenizer（分词器）、Transformer、Attention（注意力）、训练循环或生成逻辑。
+Python & PyTorch Foundation（Python 与 PyTorch 基础）。当前 Commit 只验证 Python 包、PyTorch CPU 基础运行和 CUDA 环境识别，尚未实现 Tensor 教学内容、Dataset（数据集）、Tokenizer（分词器）、Transformer、Attention（注意力）、训练循环或生成逻辑。

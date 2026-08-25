@@ -7,6 +7,37 @@ name = "model-lab"
 version = "0.1.0"
 description = "A learning-first generative model research lab."
 readme = "README.md"
+requires-python = ">=3.14,<3.15"
+dependencies = [
+    "torch>=2.13,<2.14",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pyright>=1.1,<1.2",
+    "pytest>=9,<10",
+    "ruff>=0.16,<0.17",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+filterwarnings = [
+    "ignore:Failed to initialize NumPy:UserWarning:torch\\._subclasses\\.functional_tensor",
+]
+
+[tool.ruff]
+line-length = 88
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
+
+[tool.pyright]
+include = ["src", "tests", "scripts"]
+pythonVersion = "3.14"
+typeCheckingMode = "basic"
+venvPath = "."
+venv = ".venv"
