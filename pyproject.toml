@@ -24,9 +24,6 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-filterwarnings = [
-    "ignore:Failed to initialize NumPy:UserWarning:torch\\._subclasses\\.functional_tensor",
-]
 
 [tool.ruff]
 line-length = 88

@@ -1,18 +1,9 @@
 """Print the local Python and PyTorch runtime information."""
 
-import warnings
-
-warnings.filterwarnings(
-    "ignore",
-    message="Failed to initialize NumPy:.*",
-    category=UserWarning,
-    module=r"torch\._subclasses\.functional_tensor",
-)
+from model_lab.environment import get_environment_info
 
 
 def main() -> None:
-    from model_lab.environment import get_environment_info
-
     info = get_environment_info()
     print(f"Python: {info.python_version}")
     print(f"PyTorch: {info.pytorch_version}")

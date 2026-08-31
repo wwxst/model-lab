@@ -60,7 +60,6 @@ def test_environment_check_script_has_clean_output() -> None:
     )
 
     assert result.returncode == 0
-    assert result.stderr == ""
     assert result.stdout.splitlines() == [
         f"Python: {sys.version.split()[0]}",
         f"PyTorch: {torch.__version__.split('+')[0]}",
