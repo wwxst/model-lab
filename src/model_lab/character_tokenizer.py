@@ -1,5 +1,7 @@
 """字符级分词器：在字符串与离散 Token ID 之间建立可逆映射。"""
 
+from __future__ import annotations
+
 from collections.abc import Sequence
 
 import torch
