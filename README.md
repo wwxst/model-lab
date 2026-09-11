@@ -43,4 +43,4 @@ py -3.14 -m venv .venv
 
 ## 项目状态
 
-Character Tokenizer（字符级分词器）。当前已具备 Python 与 PyTorch 环境基础、可执行且可测试的 Tensor 教学代码、顺序文本窗口 Dataset，以及字符级文本到 Token ID 的可逆转换。详细内容见 [`docs/character-tokenizer.md`](docs/character-tokenizer.md)。Embedding（嵌入）、Transformer、Attention（注意力）、训练循环和生成逻辑尚未实现。
+Token Embedding（词元嵌入）。当前已具备 Python 与 PyTorch 环境基础、可执行且可测试的 Tensor 教学代码、顺序文本窗口 Dataset、字符级文本到 Token ID 的可逆转换，以及 Token ID 到可学习连续向量的映射。详细内容见 [`docs/token-embedding.md`](docs/token-embedding.md)。位置表示、Transformer、Attention（注意力）、训练循环和生成逻辑尚未实现。

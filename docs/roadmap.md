@@ -33,4 +33,4 @@ Commit 8 之后暂时只保留方向：逐步组合完整的 Decoder-only Transf
 
 ## Current Status
 
-当前阶段为 Character Tokenizer（字符级分词器）。仓库已具备可执行、可测试的 Tensor 基础、顺序文本窗口 Dataset 和字符级文本到 Token ID 的可逆转换，但尚未实现 Embedding、模型结构、训练或生成能力。
+当前阶段为 Token Embedding（词元嵌入）。仓库已具备可执行、可测试的 Tensor 基础、顺序文本窗口 Dataset、字符级文本到 Token ID 的可逆转换，以及 Token ID 到可学习连续向量的映射，但尚未实现位置表示、模型结构、训练或生成能力。
