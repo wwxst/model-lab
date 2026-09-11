@@ -51,4 +51,13 @@ CPU                  ｜中央处理器        ｜擅长通用计算的处理器
 GPU                  ｜图形处理器        ｜适合大量并行数值计算的处理器
 CUDA                 ｜CUDA              ｜让 PyTorch 使用 NVIDIA GPU 计算的软件平台
 Device               ｜设备              ｜执行张量计算的 CPU 或 GPU
+Dataset              ｜数据集            ｜按索引提供训练样本的数据集合
+Sample               ｜样本              ｜一次训练所使用的一对输入和目标数据
+Context Length       ｜上下文长度        ｜单个样本 input 包含的离散元素数量
+Input                ｜输入              ｜模型在当前位置看到的离散序列
+Target               ｜目标              ｜每个输入位置对应的下一元素序列
+Next-token Prediction｜下一位置预测      ｜根据当前位置学习预测下一个离散元素
+Training Set         ｜训练集            ｜用于学习模型参数的数据部分
+Validation Set       ｜验证集            ｜用于检查模型表现的数据部分
+Sliding Window       ｜滑动窗口          ｜沿序列逐位置移动的固定长度取样范围
 ```
