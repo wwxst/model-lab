@@ -35,7 +35,7 @@
 
 只有收到明确的“Review PASS，可以合并”指令后，才允许将该功能分支合并到 `main`。
 
-合并后必须同步本地 `main` 与 `origin/main`，重新执行完整验证，输出 merge commit，并保持工作树干净。
+合并后必须同步本地 `main` 与 `origin/main`，重新执行完整验证，输出 merge commit，并保持工作树干净。上述同步和验证完成后，删除远端功能分支和本地功能分支。
 
 ## 3. Minimal Implementation｜最小实现规范
 
