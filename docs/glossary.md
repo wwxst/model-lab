@@ -11,8 +11,25 @@ Vocabulary           ｜词表              ｜模型能够识别的全部 Token
 Tokenizer            ｜分词器            ｜在文本与 Token ID 序列之间进行转换的规则或程序
 Embedding            ｜嵌入              ｜将离散 Token ID 映射为连续向量表示
 Tensor               ｜张量              ｜用于保存和计算多维数值数据的基本结构
+Scalar               ｜标量              ｜没有维度的单个数值
+Vector               ｜向量              ｜沿一个维度排列的一组数值
+Matrix               ｜矩阵              ｜沿两个维度排列的数值
 Dimension            ｜维度              ｜张量中一个方向或轴，例如 Batch 维或 Sequence 维
+Axis                 ｜轴                ｜在代码中按编号指定的某个维度
 Shape                ｜形状              ｜张量每个维度大小组成的描述
+Data Type            ｜数据类型          ｜张量中每个元素采用的数值类型，代码中常写作 dtype
+Indexing             ｜索引              ｜按位置选择张量中的元素或区域
+Slicing              ｜切片              ｜按范围截取张量中的一段数据
+Reshape              ｜形状变换          ｜不改变元素值和数量，改变看待张量的形状
+View                 ｜视图              ｜以兼容的连续内存布局查看同一组元素的新形状
+Transpose            ｜维度交换          ｜交换张量中的两个维度
+Permute              ｜维度重排          ｜按指定顺序重新排列张量的多个维度
+Unsqueeze            ｜增加维度          ｜在指定位置增加一个大小为 1 的维度
+Squeeze              ｜移除维度          ｜移除指定位置上大小为 1 的维度
+Broadcasting         ｜广播              ｜让兼容的较小张量自动参与较大形状的运算
+Element-wise Operation｜逐元素运算       ｜对输入张量相同位置的元素分别执行计算
+Matrix Multiplication｜矩阵乘法          ｜沿匹配的内部维度执行乘法并求和
+Autograd             ｜自动求导          ｜记录计算并在反向传播时自动计算梯度的机制
 Batch                ｜批次              ｜一次共同参与计算的一组样本
 Sequence             ｜序列              ｜按顺序排列的一串 Token
 Logits               ｜未归一化分数      ｜模型为各候选 Token 输出的原始分数
