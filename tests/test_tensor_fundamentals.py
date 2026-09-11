@@ -49,15 +49,15 @@ def test_sequence_inspection_uses_shape_ndim_and_size() -> None:
     assert sequence_length == 3
 
 
-def test_sequence_indexing_selects_batch_token_and_feature_axes() -> None:
+def test_sequence_indexing_selects_batch_position_and_feature_axes() -> None:
     sequence = torch.arange(24).reshape(2, 3, 4)
 
-    first_batch, first_token, first_feature, _ = select_tensor_regions(sequence)
+    first_batch, first_position, first_feature, _ = select_tensor_regions(sequence)
 
     assert first_batch.shape == torch.Size([3, 4])
     assert torch.equal(first_batch, sequence[0])
-    assert first_token.shape == torch.Size([2, 4])
-    assert torch.equal(first_token, sequence[:, 0])
+    assert first_position.shape == torch.Size([2, 4])
+    assert torch.equal(first_position, sequence[:, 0])
     assert first_feature.shape == torch.Size([2, 3])
     assert torch.equal(first_feature, sequence[:, :, 0])
 

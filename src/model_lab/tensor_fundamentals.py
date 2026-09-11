@@ -56,7 +56,7 @@ def select_tensor_regions(
     first_batch = sequence[0]
 
     # [B, T, C] -> [B, C]：保留所有样本，固定 T 轴的第 0 个位置。
-    first_token = sequence[:, 0]
+    first_position = sequence[:, 0]
 
     # [B, T, C] -> [B, T]：保留所有样本和位置，只选择 C 轴的第 0 个特征。
     first_feature = sequence[:, :, 0]
@@ -64,7 +64,7 @@ def select_tensor_regions(
     # [B, T, C] -> [B, 2, C]：在 T 轴截取前两个位置，其他轴保持完整。
     sequence_prefix = sequence[:, :2, :]
 
-    return first_batch, first_token, first_feature, sequence_prefix
+    return first_batch, first_position, first_feature, sequence_prefix
 
 
 def reshape_sequence(sequence: torch.Tensor) -> tuple[torch.Tensor, torch.Tensor]:
