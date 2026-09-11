@@ -54,7 +54,16 @@ def test_sequence_split_preserves_order_and_does_not_overlap() -> None:
 
     assert torch.equal(train_data, torch.arange(8, dtype=torch.int64))
     assert torch.equal(validation_data, torch.arange(8, 10, dtype=torch.int64))
-    assert train_data[-1] != validation_data[0]
+    assert torch.equal(torch.cat((train_data, validation_data)), data)
+
+
+@pytest.mark.parametrize("index", [-1, 3])
+def test_dataset_rejects_negative_and_out_of_range_indices(index: int) -> None:
+    data = torch.arange(6, dtype=torch.int64)
+    dataset = TextSequenceDataset(data, context_length=3)
+
+    with pytest.raises(IndexError):
+        dataset[index]
 
 
 @pytest.mark.parametrize(
@@ -81,3 +90,9 @@ def test_sequence_split_requires_ratio_between_zero_and_one(
 ) -> None:
     with pytest.raises(ValueError):
         split_sequence(torch.arange(10, dtype=torch.int64), train_ratio)
+
+
+@pytest.mark.parametrize("length", [0, 1])
+def test_sequence_split_rejects_empty_train_or_validation_part(length: int) -> None:
+    with pytest.raises(ValueError):
+        split_sequence(torch.arange(length, dtype=torch.int64), train_ratio=0.5)

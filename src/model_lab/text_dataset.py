@@ -29,6 +29,9 @@ class TextSequenceDataset(Dataset[tuple[torch.Tensor, torch.Tensor]]):
         return self.data.numel() - self.context_length
 
     def __getitem__(self, index: int) -> tuple[torch.Tensor, torch.Tensor]:
+        if index < 0 or index >= len(self):
+            raise IndexError("dataset index out of range")
+
         # 每次窗口向后移动一个位置，因此 input 和 target 长度都等于 T。
         start = index
         end = start + self.context_length
@@ -58,5 +61,7 @@ def split_sequence(
     split_index = int(sequence.numel() * train_ratio)
     train_data = sequence[:split_index]
     validation_data = sequence[split_index:]
+    if train_data.numel() == 0 or validation_data.numel() == 0:
+        raise ValueError("train and validation sequences must both be non-empty")
 
     return train_data, validation_data
