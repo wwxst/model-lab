@@ -1,10 +1,10 @@
 # Character Tokenizer
 
-`CharacterTokenizer`（字符级分词器）把人类可读的字符串转换成模型可以处理的离散整数序列，并且可以把这个序列还原成原始文本。
+`CharacterTokenizer`（字符级分词器）把人类可读的字符串转换成后续模型输入流程使用的离散 Token ID 序列，并且可以把这个序列还原成原始文本。Token ID 还需要经过 Embedding（嵌入），才能成为模型计算使用的连续向量表示。
 
 ## 1. 为什么需要 Tokenizer
 
-模型的输入是 Tensor（张量）中的数值，不能直接读取 Python `str`。Tokenizer（分词器）负责把文本拆成 Token（词元），再为每个 Token 分配一个 Token ID（词元编号）。本 Commit 选择最容易观察的规则：一个 Unicode 字符就是一个 Token。
+模型的输入是 Tensor（张量）中的数值，不能直接读取 Python `str`。Tokenizer（分词器）负责把文本拆成 Token（词元），再为每个 Token 分配一个 Token ID（词元编号）。当前实现选择最容易观察的规则：把 Python `str` 迭代得到的每个 Unicode 码点作为一个 Token。
 
 ```text
 Raw Text（原始文本）
@@ -16,7 +16,7 @@ Character → Token ID（字符到编号）
 Token IDs（整数序列）
 ```
 
-Token ID 只是离散编号，不是有大小关系的数值。例如 `A → 0`、`B → 1`、`C → 2` 不表示 `C` 比 `B`“更大”，也不表示 `C` 是 `A` 的两倍。Commit 6 的 Token Embedding（词元嵌入）才会把这些编号映射为可学习的连续向量。
+Token ID 只是离散编号，不是有大小关系的数值。例如 `A → 0`、`B → 1`、`C → 2` 不表示 `C` 比 `B`“更大”，也不表示 `C` 是 `A` 的两倍。下一阶段的 Token Embedding（词元嵌入）会把这些编号映射为可学习的连续向量。
 
 ## 2. Vocabulary 如何建立
 
@@ -49,10 +49,10 @@ token_ids = tokenizer.encode("hello")
 返回值是 CPU 上形状为 `[T]` 的 `torch.int64` Tensor：
 
 ```text
-T = Sequence Length ｜序列长度 ｜当前字符串中的字符数量
+T = Sequence Length ｜序列长度 ｜Python str 迭代得到的 Unicode 码点数量
 ```
 
-每个字符占一个位置。已经创建好的 Tokenizer 编码空字符串时，返回形状为 `[0]` 的空 Tensor。如果文本包含不在词表中的字符，Tokenizer 会抛出明确的 `ValueError`，当前版本不会添加 `<UNK>` 或其他特殊 Token。
+每个 Unicode 码点占一个位置。已经创建好的 Tokenizer 编码空字符串时，返回形状为 `[0]` 的空 Tensor。如果文本包含不在词表中的码点，Tokenizer 会抛出明确的 `ValueError`，当前实现不会添加 `<UNK>` 或其他特殊 Token。
 
 ## 4. decode
 
@@ -75,7 +75,7 @@ assert tokenizer.decode(tokenizer.encode("hello")) == "hello"
 
 ## 6. Unicode 字符
 
-Python `str` 已经提供 Unicode 字符语义，因此中文、英文、标点、空格和换行都可以直接进入词表。例如：
+Python `str` 按 Unicode 码点迭代，因此中文、英文、标点、空格和换行都可以直接进入词表。一个用户看到的完整字形可能由多个码点组成，当前实现会把这些码点分别作为 Token。例如：
 
 ```python
 text = "你好，AI\n"
@@ -83,11 +83,11 @@ tokenizer = CharacterTokenizer.from_text(text)
 assert tokenizer.decode(tokenizer.encode(text)) == text
 ```
 
-本 Commit 不把字符串转换为 UTF-8 字节，也不实现 byte-level tokenizer（字节级分词器）。
+当前实现不把字符串转换为 UTF-8 字节，也不实现 byte-level tokenizer（字节级分词器）。
 
 ## 7. 与 TextSequenceDataset 连接
 
-Commit 4 的 `TextSequenceDataset` 接受一维 `torch.int64` 离散序列。现在可以直接把真实文本接到它上面：
+`TextSequenceDataset` 接受一维 `torch.int64` 离散序列，因此可以直接接收真实文本经过 Tokenizer 编码后的 Token ID：
 
 ```python
 from model_lab.text_dataset import TextSequenceDataset
@@ -107,6 +107,6 @@ Tokenizer 只负责文本与 Token ID 的转换，不负责 Dataset、batch、pa
 
 ## 8. 优点与局限
 
-字符级分词器的逻辑很简单，词表容易检查，最适合学习文本如何变成整数输入。它的局限是序列可能很长：`hello` 需要 5 个 Token，`你好` 需要 2 个 Token，复杂文本也会按字符数量增长。
+字符级分词器的逻辑很简单，词表容易检查，最适合学习文本如何变成整数输入。它的局限是序列可能很长：`hello` 需要 5 个 Token，`你好` 需要 2 个 Token，复杂文本的序列长度也会随 Unicode 码点数量增长。
 
-现代大模型通常选择 Subword Tokenization（子词分词）来平衡 Vocabulary Size（词表大小）和 Sequence Length（序列长度）。BPE、WordPiece、SentencePiece 等算法不属于本 Commit；下一步 Embedding 才会使用这里产生的整数 Token ID。
+现代大模型通常选择 Subword Tokenization（子词分词）来平衡 Vocabulary Size（词表大小）和 Sequence Length（序列长度）。当前实现不包含 BPE、WordPiece、SentencePiece 等算法；下一阶段的 Token Embedding 会使用这里产生的整数 Token ID。
