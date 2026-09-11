@@ -33,4 +33,4 @@ Commit 8 之后暂时只保留方向：逐步组合完整的 Decoder-only Transf
 
 ## Current Status
 
-当前处于 Commit 2：Python & PyTorch Foundation。仓库已具备最小 Python 包、PyTorch 运行环境、测试和代码质量工具，但尚未实现 Tensor 教学内容、数据处理、训练或生成能力。
+当前处于 Commit 3：Tensor Fundamentals。仓库已具备可执行、可测试的 PyTorch Tensor 基础教学代码，但尚未实现数据处理、Tokenizer、模型结构、训练或生成能力。

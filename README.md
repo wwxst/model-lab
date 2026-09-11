@@ -43,4 +43,4 @@ py -3.14 -m venv .venv
 
 ## 项目状态
 
-Python & PyTorch Foundation（Python 与 PyTorch 基础）。当前 Commit 只验证 Python 包、PyTorch CPU 基础运行和 CUDA 环境识别，尚未实现 Tensor 教学内容、Dataset（数据集）、Tokenizer（分词器）、Transformer、Attention（注意力）、训练循环或生成逻辑。
+Tensor Fundamentals（张量基础）。当前已具备 Python 与 PyTorch 环境基础，以及可执行、可测试的 Tensor 教学代码。详细内容见 [`docs/tensor-fundamentals.md`](docs/tensor-fundamentals.md)。Dataset（数据集）、Tokenizer（分词器）、Transformer、Attention（注意力）、训练循环和生成逻辑尚未实现。
