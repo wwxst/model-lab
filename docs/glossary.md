@@ -9,6 +9,13 @@ Parameter            ｜参数              ｜模型在训练中通过梯度更
 Token                ｜词元              ｜模型实际读取和预测的离散文本单位
 Vocabulary           ｜词表              ｜模型能够识别的全部 Token 集合
 Tokenizer            ｜分词器            ｜在文本与 Token ID 序列之间进行转换的规则或程序
+Token ID             ｜词元编号          ｜词表为每个 Token 分配的离散整数编号
+Character-level Tokenizer｜字符级分词器   ｜把每个 Unicode 字符作为一个 Token 的分词器
+Encode               ｜编码              ｜把文本转换为 Token ID 序列的过程
+Decode               ｜解码              ｜把 Token ID 序列还原为文本的过程
+Vocabulary Size      ｜词表大小          ｜词表中唯一 Token 的数量
+Unknown Character    ｜未知字符          ｜当前词表中没有、因而无法编码的字符
+Round Trip           ｜往返转换          ｜先编码再解码后恢复原始文本的过程
 Embedding            ｜嵌入              ｜将离散 Token ID 映射为连续向量表示
 Tensor               ｜张量              ｜用于保存和计算多维数值数据的基本结构
 Scalar               ｜标量              ｜没有维度的单个数值

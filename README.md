@@ -43,4 +43,4 @@ py -3.14 -m venv .venv
 
 ## 项目状态
 
-Tensor Fundamentals（张量基础）。当前已具备 Python 与 PyTorch 环境基础，以及可执行、可测试的 Tensor 教学代码。详细内容见 [`docs/tensor-fundamentals.md`](docs/tensor-fundamentals.md)。Dataset（数据集）、Tokenizer（分词器）、Transformer、Attention（注意力）、训练循环和生成逻辑尚未实现。
+Character Tokenizer（字符级分词器）。当前已具备 Python 与 PyTorch 环境基础、可执行且可测试的 Tensor 教学代码、顺序文本窗口 Dataset，以及字符级文本到 Token ID 的可逆转换。详细内容见 [`docs/character-tokenizer.md`](docs/character-tokenizer.md)。Embedding（嵌入）、Transformer、Attention（注意力）、训练循环和生成逻辑尚未实现。
