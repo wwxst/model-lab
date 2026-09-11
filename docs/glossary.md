@@ -17,6 +17,12 @@ Vocabulary Size      ｜词表大小          ｜词表中唯一 Token 的数量
 Unknown Character    ｜未知字符          ｜当前词表中没有、因而无法编码的字符
 Round Trip           ｜往返转换          ｜先编码再解码后恢复原始文本的过程
 Embedding            ｜嵌入              ｜将离散 Token ID 映射为连续向量表示
+Token Embedding      ｜词元嵌入          ｜为每个 Token ID 查找可学习连续向量的表示层
+Embedding Table      ｜嵌入表            ｜按 Token ID 分行保存可学习向量的参数表
+Embedding Dimension  ｜嵌入维度          ｜每个 Token 向量包含的连续特征数量
+Lookup               ｜查表              ｜使用 Token ID 选取 Embedding Table 对应行的操作
+Continuous Representation｜连续表示      ｜用可参与连续数学计算的向量表示离散对象
+Feature Dimension    ｜特征维度          ｜向量中用于承载不同连续特征的维度
 Tensor               ｜张量              ｜用于保存和计算多维数值数据的基本结构
 Scalar               ｜标量              ｜没有维度的单个数值
 Vector               ｜向量              ｜沿一个维度排列的一组数值
