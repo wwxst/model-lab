@@ -33,4 +33,4 @@ Commit 8 之后暂时只保留方向：逐步组合完整的 Decoder-only Transf
 
 ## Current Status
 
-当前阶段为 Text Dataset（文本数据与训练样本）。仓库已具备可执行、可测试的 Tensor 基础和顺序文本窗口 Dataset，但尚未实现 Tokenizer、模型结构、训练或生成能力。
+当前阶段为 Character Tokenizer（字符级分词器）。仓库已具备可执行、可测试的 Tensor 基础、顺序文本窗口 Dataset 和字符级文本到 Token ID 的可逆转换，但尚未实现 Embedding、模型结构、训练或生成能力。
