@@ -33,7 +33,7 @@ class PositionEmbedding(nn.Module):
     def forward(self, sequence_length: int) -> torch.Tensor:
         """生成 0 到 T-1 的 Position ID，并查表返回形状 [T, C] 的向量。"""
 
-        if not isinstance(sequence_length, int):
+        if type(sequence_length) is not int:
             raise TypeError("sequence_length must be an integer")
         if sequence_length <= 0:
             raise ValueError("sequence_length must be greater than zero")

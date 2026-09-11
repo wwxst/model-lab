@@ -26,7 +26,7 @@ Feature Dimension    ｜特征维度          ｜向量中用于承载不同连�
 Position             ｜位置              ｜Token 在序列中所在的绝对顺序位置
 Position ID          ｜位置编号          ｜表示序列位置的离散整数编号
 Position Embedding   ｜位置嵌入          ｜把位置编号映射为可学习连续向量的表示层
-Position Representation｜位置表示       ｜由 Token 信息和位置向量共同构成的输入表示
+Position Representation｜位置表示       ｜向模型提供序列位置信息的表示方式；当前实现使用可学习绝对位置嵌入
 Maximum Sequence Length｜最大序列长度  ｜位置表支持的最大序列长度
 Absolute Position    ｜绝对位置          ｜从序列起点编号的固定位置
 Learnable Position Embedding｜可学习位置嵌入｜通过梯度学习每个绝对位置向量的位置表示

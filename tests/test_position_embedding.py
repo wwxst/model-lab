@@ -1,3 +1,5 @@
+from typing import Any
+
 import pytest
 import torch
 from torch import nn
@@ -51,6 +53,14 @@ def test_sequence_length_must_fit_position_table(sequence_length: int) -> None:
     position_embedding = PositionEmbedding(max_sequence_length=3, embedding_dim=2)
 
     with pytest.raises(ValueError):
+        position_embedding(sequence_length=sequence_length)
+
+
+@pytest.mark.parametrize("sequence_length", [1.5, True])
+def test_sequence_length_rejects_non_integer_values(sequence_length: Any) -> None:
+    position_embedding = PositionEmbedding(max_sequence_length=3, embedding_dim=2)
+
+    with pytest.raises(TypeError):
         position_embedding(sequence_length=sequence_length)
 
 
