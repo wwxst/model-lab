@@ -43,4 +43,4 @@ py -3.14 -m venv .venv
 
 ## 项目状态
 
-Token Embedding（词元嵌入）。当前已具备 Python 与 PyTorch 环境基础、可执行且可测试的 Tensor 教学代码、顺序文本窗口 Dataset、字符级文本到 Token ID 的可逆转换，以及 Token ID 到可学习连续向量的映射。详细内容见 [`docs/token-embedding.md`](docs/token-embedding.md)。位置表示、Transformer、Attention（注意力）、训练循环和生成逻辑尚未实现。
+Position Representation（位置表示）。当前已具备 Python 与 PyTorch 环境基础、可执行且可测试的 Tensor 教学代码、顺序文本窗口 Dataset、字符级文本到 Token ID 的可逆转换、Token ID 到可学习连续向量的映射，以及绝对位置到可学习位置向量的映射。详细内容见 [`docs/position-representation.md`](docs/position-representation.md)。Self-Attention（自注意力）、Transformer、训练循环和生成逻辑尚未实现。

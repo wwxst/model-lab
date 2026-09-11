@@ -23,6 +23,13 @@ Embedding Dimension  ｜嵌入维度          ｜每个 Token 向量包含的连
 Lookup               ｜查表              ｜使用 Token ID 选取 Embedding Table 对应行的操作
 Continuous Representation｜连续表示      ｜用可参与连续数学计算的向量表示离散对象
 Feature Dimension    ｜特征维度          ｜向量中用于承载不同连续特征的维度
+Position             ｜位置              ｜Token 在序列中所在的绝对顺序位置
+Position ID          ｜位置编号          ｜表示序列位置的离散整数编号
+Position Embedding   ｜位置嵌入          ｜把位置编号映射为可学习连续向量的表示层
+Position Representation｜位置表示       ｜由 Token 信息和位置向量共同构成的输入表示
+Maximum Sequence Length｜最大序列长度  ｜位置表支持的最大序列长度
+Absolute Position    ｜绝对位置          ｜从序列起点编号的固定位置
+Learnable Position Embedding｜可学习位置嵌入｜通过梯度学习每个绝对位置向量的位置表示
 Tensor               ｜张量              ｜用于保存和计算多维数值数据的基本结构
 Scalar               ｜标量              ｜没有维度的单个数值
 Vector               ｜向量              ｜沿一个维度排列的一组数值
