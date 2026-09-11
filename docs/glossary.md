@@ -10,7 +10,7 @@ Token                ｜词元              ｜模型实际读取和预测的离
 Vocabulary           ｜词表              ｜模型能够识别的全部 Token 集合
 Tokenizer            ｜分词器            ｜在文本与 Token ID 序列之间进行转换的规则或程序
 Token ID             ｜词元编号          ｜词表为每个 Token 分配的离散整数编号
-Character-level Tokenizer｜字符级分词器   ｜把每个 Unicode 字符作为一个 Token 的分词器
+Character-level Tokenizer｜字符级分词器   ｜把 Python str 迭代得到的每个 Unicode 码点作为一个 Token 的分词器
 Encode               ｜编码              ｜把文本转换为 Token ID 序列的过程
 Decode               ｜解码              ｜把 Token ID 序列还原为文本的过程
 Vocabulary Size      ｜词表大小          ｜词表中唯一 Token 的数量

@@ -57,7 +57,7 @@ def test_token_ids_lookup_corresponding_embedding_rows() -> None:
     assert torch.equal(vectors, expected_weight[[2, 0, 1]])
 
 
-def test_gradient_updates_only_used_rows_and_accumulates_repeated_tokens() -> None:
+def test_gradient_accumulates_only_for_used_rows_and_repeated_tokens() -> None:
     embedding = TokenEmbedding(vocab_size=4, embedding_dim=3)
     token_ids = torch.tensor([0, 2, 2], dtype=torch.int64)
 
