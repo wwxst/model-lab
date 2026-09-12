@@ -43,4 +43,4 @@ py -3.14 -m venv .venv
 
 ## 项目状态
 
-Single-Head Self-Attention（单头自注意力）。当前已具备 Python 与 PyTorch 环境基础、可执行且可测试的 Tensor 教学代码、顺序文本窗口 Dataset、字符级文本到 Token ID 的可逆转换、Token 与 Position Embedding（位置嵌入），以及可观察注意力权重的单头因果自注意力。详细内容见 [`docs/single-head-self-attention.md`](docs/single-head-self-attention.md)。Multi-Head Attention（多头注意力）、完整 Transformer、训练循环和生成逻辑尚未实现。
+Multi-Head Self-Attention（多头自注意力）。当前已具备 Python 与 PyTorch 环境基础、可执行且可测试的 Tensor 教学代码、顺序文本窗口 Dataset、字符级文本到 Token ID 的可逆转换、Token 与 Position Embedding（位置嵌入），以及可观察每个 Head 注意力权重的多头因果自注意力。详细内容见 [`docs/multi-head-self-attention.md`](docs/multi-head-self-attention.md)。完整 Transformer、训练循环和生成逻辑尚未实现。

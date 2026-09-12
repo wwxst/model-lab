@@ -64,6 +64,12 @@ Transformer          ｜Transformer 架构  ｜通过注意力等结构处理序
 Attention            ｜注意力            ｜计算序列中不同 Token 之间信息关系的机制
 Self-Attention       ｜自注意力          ｜从同一输入产生 Query、Key、Value 并动态聚合序列信息的注意力机制
 Single-Head Attention｜单头注意力        ｜只使用一组 Query、Key、Value 投影计算关系的注意力
+Multi-Head Attention ｜多头注意力        ｜并行使用多个 Head 计算注意力，再拼接和投影各 Head 的结果
+Attention Head       ｜注意力头          ｜在部分特征维度上独立计算注意力的一条分支
+Head Dimension       ｜头维度            ｜单个 Head 分到的特征数量，等于嵌入维度除以 Head 数量
+Split Heads          ｜拆分多头          ｜把完整特征维拆成多个较小 Head 的形状变换
+Concat Heads         ｜拼接多头          ｜把多个 Head 的上下文结果重新拼接为完整特征维
+Output Projection    ｜输出投影          ｜在拼接后混合不同 Head 信息的线性变换
 Query                ｜查询              ｜由输入经过可学习投影得到、用于匹配各位置 Key 的向量
 Key                  ｜键                ｜由输入经过可学习投影得到、用于与 Query 计算匹配分数的向量
 Value                ｜值                ｜由输入经过可学习投影得到、按照注意力权重被加权聚合的向量

@@ -15,9 +15,10 @@ Commit 5  Character Tokenizer
 Commit 6  Token Embedding
 Commit 7  Position Representation
 Commit 8  Single-Head Self-Attention
+Commit 9  Multi-Head Self-Attention
 ```
 
-Commit 8 之后暂时只保留方向：逐步组合完整的 Decoder-only Transformer，建立训练与推理能力，并通过实验理解模型行为。具体模块边界、实现顺序和验收标准由后续 Commit 决定，不在当前阶段提前固定。
+Commit 9 之后暂时只保留方向：逐步组合完整的 Decoder-only Transformer，建立训练与推理能力，并通过实验理解模型行为。具体模块边界、实现顺序和验收标准由后续 Commit 决定，不在当前阶段提前固定。
 
 ## Phase 2: Modern LLM Architecture
 
@@ -33,4 +34,4 @@ Commit 8 之后暂时只保留方向：逐步组合完整的 Decoder-only Transf
 
 ## Current Status
 
-当前阶段为 Single-Head Self-Attention（单头自注意力）。仓库已具备可执行、可测试的 Tensor 基础、顺序文本窗口 Dataset、字符级 Tokenizer、Token 与 Position Embedding，以及单头因果自注意力；尚未实现多头注意力、完整模型结构、训练或生成能力。
+当前阶段为 Multi-Head Self-Attention（多头自注意力）。仓库已具备可执行、可测试的 Tensor 基础、顺序文本窗口 Dataset、字符级 Tokenizer、Token 与 Position Embedding，以及多头因果自注意力；尚未实现完整模型结构、训练或生成能力。
