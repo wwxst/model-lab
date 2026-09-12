@@ -62,6 +62,19 @@ Training             ｜训练              ｜使用数据和损失反复更新
 Inference            ｜推理              ｜使用训练后的模型计算预测结果的过程
 Transformer          ｜Transformer 架构  ｜通过注意力等结构处理序列的一类神经网络架构
 Attention            ｜注意力            ｜计算序列中不同 Token 之间信息关系的机制
+Self-Attention       ｜自注意力          ｜从同一输入产生 Query、Key、Value 并动态聚合序列信息的注意力机制
+Single-Head Attention｜单头注意力        ｜只使用一组 Query、Key、Value 投影计算关系的注意力
+Query                ｜查询              ｜由输入经过可学习投影得到、用于匹配各位置 Key 的向量
+Key                  ｜键                ｜由输入经过可学习投影得到、用于与 Query 计算匹配分数的向量
+Value                ｜值                ｜由输入经过可学习投影得到、按照注意力权重被加权聚合的向量
+Attention Score      ｜注意力分数        ｜Query 与 Key 点积后得到的未归一化匹配分数
+Scaled Dot-Product Attention｜缩放点积注意力｜将 Query 与 Key 的点积除以键维度平方根后计算权重的注意力
+Causal Mask          ｜因果掩码          ｜屏蔽未来位置、使当前位置只能读取自己和过去位置的掩码
+Softmax              ｜Softmax 归一化    ｜把一组分数转换为总和为 1 的非负权重
+Attention Weight     ｜注意力权重        ｜由当前输入动态计算的中间结果，表示各可见位置参与信息聚合的比例，不是模型参数
+Context Representation｜上下文表示      ｜按照注意力权重对 Value 加权求和后得到的连续表示
+Future Token         ｜未来词元          ｜位于当前处理位置之后、因因果约束而不能被读取的 Token
+Information Leakage  ｜信息泄漏          ｜训练计算错误读取本应不可见的信息，导致学习目标与真实预测过程不一致
 Python               ｜Python            ｜运行项目代码的编程语言和执行环境
 PyTorch              ｜PyTorch           ｜提供张量、自动求导和 CPU/GPU 数值计算的库
 Runtime              ｜运行时            ｜程序实际执行时所使用的软件环境

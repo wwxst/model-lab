@@ -33,4 +33,4 @@ Commit 8 之后暂时只保留方向：逐步组合完整的 Decoder-only Transf
 
 ## Current Status
 
-当前阶段为 Position Representation（位置表示）。仓库已具备可执行、可测试的 Tensor 基础、顺序文本窗口 Dataset、字符级文本到 Token ID 的可逆转换、Token ID 到可学习连续向量的映射，以及绝对位置到可学习位置向量的映射，但尚未实现自注意力、模型结构、训练或生成能力。
+当前阶段为 Single-Head Self-Attention（单头自注意力）。仓库已具备可执行、可测试的 Tensor 基础、顺序文本窗口 Dataset、字符级 Tokenizer、Token 与 Position Embedding，以及单头因果自注意力；尚未实现多头注意力、完整模型结构、训练或生成能力。
