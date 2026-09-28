@@ -48,4 +48,6 @@ Parameter Update
 
 ## 当前边界
 
-当前仓库具备最小 Python 包、PyTorch CPU 基础运行、CUDA 环境识别、测试和代码质量工具。当前尚未实现 Tensor 教学内容、Tokenizer、Embedding、Decoder Transformer、Loss、Backward、Optimizer、训练循环或推理流程，也没有为这些内容创建占位模块。
+当前仓库已实现并测试以下独立基础组件：Tensor 教学代码、顺序文本窗口 Dataset、字符级 Tokenizer、Token Embedding、Position Embedding、Single-Head 与 Multi-Head Causal Self-Attention，以及逐 Token 执行 `C → 4C → GELU → C` 特征变换的 Feed-Forward Network。
+
+当前 Attention 与 Feed-Forward Network 还没有组合成 Transformer Block。仓库尚未实现 Residual Connection、Normalization、Decoder Stack、Language Model Head、完整模型、Loss、Optimizer 驱动的训练循环、Checkpoint 或推理生成流程，也没有为这些未来能力创建占位模块。

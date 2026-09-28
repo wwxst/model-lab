@@ -61,6 +61,11 @@ Checkpoint           ｜检查点            ｜训练过程中保存的模型�
 Training             ｜训练              ｜使用数据和损失反复更新模型参数的过程
 Inference            ｜推理              ｜使用训练后的模型计算预测结果的过程
 Transformer          ｜Transformer 架构  ｜通过注意力等结构处理序列的一类神经网络架构
+Feed-Forward Network ｜前馈网络          ｜对每个 Token 的特征独立执行两层线性变换的网络
+MLP                  ｜多层感知机        ｜由线性层和非线性激活函数组成的前馈结构
+Expansion Dimension  ｜扩展维度          ｜前馈网络中间层扩展后的特征数量，当前固定为嵌入维度的四倍
+GELU                 ｜高斯误差线性单元  ｜在两层线性投影之间加入非线性表达能力的激活函数
+Position-wise        ｜逐位置            ｜对每个序列位置独立应用相同计算，不混合不同 Token
 Attention            ｜注意力            ｜计算序列中不同 Token 之间信息关系的机制
 Self-Attention       ｜自注意力          ｜从同一输入产生 Query、Key、Value 并动态聚合序列信息的注意力机制
 Single-Head Attention｜单头注意力        ｜只使用一组 Query、Key、Value 投影计算关系的注意力

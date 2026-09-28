@@ -16,9 +16,22 @@ Commit 6  Token Embedding
 Commit 7  Position Representation
 Commit 8  Single-Head Self-Attention
 Commit 9  Multi-Head Self-Attention
+Commit 10 MLP / Feed-Forward Network
 ```
 
-Commit 9 之后暂时只保留方向：逐步组合完整的 Decoder-only Transformer，建立训练与推理能力，并通过实验理解模型行为。具体模块边界、实现顺序和验收标准由后续 Commit 决定，不在当前阶段提前固定。
+后续计划按以下顺序逐步组合完整的 Decoder-only Transformer，建立训练与推理能力。以下项目仍是未来方向，不代表当前已经实现；每个 Commit 的具体模块边界和验收标准仍在进入该 Commit 时确定。
+
+```text
+Commit 11 Residual Connection + Normalization
+Commit 12 Transformer Block
+Commit 13 Decoder Stack
+Commit 14 Language Model Head
+Commit 15 Complete Decoder-only Model
+Commit 16 Cross Entropy Loss
+Commit 17 Training Loop
+Commit 18 Checkpoint
+Commit 19 Autoregressive Generation
+```
 
 ## Phase 2: Modern LLM Architecture
 
@@ -34,4 +47,4 @@ Commit 9 之后暂时只保留方向：逐步组合完整的 Decoder-only Transf
 
 ## Current Status
 
-当前阶段为 Multi-Head Self-Attention（多头自注意力）。仓库已具备可执行、可测试的 Tensor 基础、顺序文本窗口 Dataset、字符级 Tokenizer、Token 与 Position Embedding，以及多头因果自注意力；尚未实现完整模型结构、训练或生成能力。
+当前阶段为 MLP / Feed-Forward Network（多层感知机 / 前馈网络）。仓库已具备可执行、可测试的 Tensor 基础、顺序文本窗口 Dataset、字符级 Tokenizer、Token 与 Position Embedding、多头因果自注意力，以及逐 Token 前馈网络；尚未实现 Residual Connection、Normalization、完整模型结构、训练或生成能力。
