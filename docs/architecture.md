@@ -68,4 +68,6 @@ Token IDs [B,T]
 → Logits
 ```
 
-当前尚未实现 Loss、Optimizer 驱动的训练循环、Checkpoint 或推理生成流程；这些未来能力没有占位模块。
+Cross Entropy Loss 已能使用模型的 `[B,T,V]` Logits 和 Dataset 的 `[B,T]` Target IDs 计算标量平均损失，并通过 Autograd 将梯度传回全部模型参数。
+
+当前尚未实现 Optimizer 驱动的训练循环、Checkpoint 或推理生成流程；这些未来能力没有占位模块。
