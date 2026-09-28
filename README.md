@@ -43,4 +43,4 @@ py -3.14 -m venv .venv
 
 ## 项目状态
 
-Decoder Stack（解码器堆叠）。当前已能使用 `nn.ModuleList` 注册并顺序执行多个具有独立参数的 Pre-Norm Decoder Transformer Block，同时保持 `[B,T,C]` shape 和因果行为。详细内容见 [`docs/decoder-stack.md`](docs/decoder-stack.md)。Token/Position Embedding 尚未与 Stack 组合，Language Model Head、完整模型、训练循环和生成逻辑也尚未实现。
+Language Model Head（语言模型输出头）。当前已能把 Decoder Stack 的 `[B,T,C]` Hidden State（隐藏状态）通过无偏置线性投影转换为 `[B,T,V]` Logits（未归一化分数）。详细内容见 [`docs/language-model-head.md`](docs/language-model-head.md)。Token/Position Embedding、Decoder Stack 与 Head 尚未组合成完整模型，Loss、训练循环和生成逻辑也尚未实现。
