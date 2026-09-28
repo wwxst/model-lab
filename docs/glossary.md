@@ -66,6 +66,11 @@ Sublayer             ｜子层              ｜Block 内承担一种计算职责
 Pre-Norm             ｜前置归一化        ｜在输入进入每个子层之前执行 Layer Normalization
 Residual Path        ｜残差路径          ｜让子层输入绕过子层并直接加到输出上的路径
 Hidden State         ｜隐藏状态          ｜Token 在模型内部逐层更新的连续向量表示
+Decoder Stack        ｜解码器堆叠        ｜按顺序连接多个 Decoder Transformer Block 的结构
+Layer                ｜层                ｜Stack 中一个具有独立参数的 Transformer Block
+Depth                ｜深度              ｜Stack 包含的 Transformer Block 数量
+ModuleList           ｜模块列表          ｜让 PyTorch 注册并管理一组有顺序的子模块
+Sequential Execution ｜顺序执行          ｜让前一层输出成为后一层输入的计算方式
 Feed-Forward Network ｜前馈网络          ｜对每个 Token 的特征独立执行两层线性变换的网络
 MLP                  ｜多层感知机        ｜由线性层和非线性激活函数组成的前馈结构
 Expansion Dimension  ｜扩展维度          ｜前馈网络中间层扩展后的特征数量，当前固定为嵌入维度的四倍

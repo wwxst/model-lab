@@ -43,4 +43,4 @@ py -3.14 -m venv .venv
 
 ## 项目状态
 
-Transformer Block（Transformer 模块）。当前已把 Layer Normalization（层归一化）、多头因果自注意力、逐 Token 前馈网络和两条 Residual Connection（残差连接）按 Pre-Norm（前置归一化）顺序组合为可执行、可测试的 Decoder Block。详细内容见 [`docs/transformer-block.md`](docs/transformer-block.md)。Decoder Stack、完整模型、训练循环和生成逻辑尚未实现。
+Decoder Stack（解码器堆叠）。当前已能使用 `nn.ModuleList` 注册并顺序执行多个具有独立参数的 Pre-Norm Decoder Transformer Block，同时保持 `[B,T,C]` shape 和因果行为。详细内容见 [`docs/decoder-stack.md`](docs/decoder-stack.md)。Token/Position Embedding 尚未与 Stack 组合，Language Model Head、完整模型、训练循环和生成逻辑也尚未实现。

@@ -19,12 +19,12 @@ Commit 9  Multi-Head Self-Attention
 Commit 10 MLP / Feed-Forward Network
 Commit 11 Residual Connection + Normalization
 Commit 12 Transformer Block
+Commit 13 Decoder Stack
 ```
 
 后续计划按以下顺序逐步组合完整的 Decoder-only Transformer，建立训练与推理能力。以下项目仍是未来方向，不代表当前已经实现；每个 Commit 的具体模块边界和验收标准仍在进入该 Commit 时确定。
 
 ```text
-Commit 13 Decoder Stack
 Commit 14 Language Model Head
 Commit 15 Complete Decoder-only Model
 Commit 16 Cross Entropy Loss
@@ -47,4 +47,4 @@ Commit 19 Autoregressive Generation
 
 ## Current Status
 
-当前阶段为 Transformer Block（Transformer 模块）。仓库已将手写 Layer Normalization、多头因果自注意力、逐 Token 前馈网络和两条残差连接按 Pre-Norm 顺序组合为可执行、可测试的 Decoder Block；尚未实现 Decoder Stack、完整模型结构、训练或生成能力。
+当前阶段为 Decoder Stack（解码器堆叠）。仓库已能注册并顺序执行多个具有独立参数的 Pre-Norm Decoder Transformer Block，同时保持 `[B,T,C]` shape 和因果行为；尚未实现 Language Model Head、完整模型、训练或生成能力。
