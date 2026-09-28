@@ -66,6 +66,13 @@ MLP                  ｜多层感知机        ｜由线性层和非线性激活
 Expansion Dimension  ｜扩展维度          ｜前馈网络中间层扩展后的特征数量，当前固定为嵌入维度的四倍
 GELU                 ｜高斯误差线性单元  ｜在两层线性投影之间加入非线性表达能力的激活函数
 Position-wise        ｜逐位置            ｜对每个序列位置独立应用相同计算，不混合不同 Token
+Residual Connection  ｜残差连接          ｜把子层输入直接加到子层输出上的连接
+Layer Normalization  ｜层归一化          ｜沿单个 Token 的特征维计算并调整数值分布
+Mean                 ｜均值              ｜一组数值之和除以数值数量
+Variance             ｜方差              ｜各数值与均值之差的平方的平均值
+Epsilon              ｜极小常数          ｜加在方差上以避免除以零的正数
+Scale                ｜缩放参数          ｜归一化后对每个特征进行可学习缩放的参数
+Shift                ｜平移参数          ｜归一化后对每个特征进行可学习平移的参数
 Attention            ｜注意力            ｜计算序列中不同 Token 之间信息关系的机制
 Self-Attention       ｜自注意力          ｜从同一输入产生 Query、Key、Value 并动态聚合序列信息的注意力机制
 Single-Head Attention｜单头注意力        ｜只使用一组 Query、Key、Value 投影计算关系的注意力
