@@ -48,6 +48,11 @@ Parameter Update
 
 ## 当前边界
 
-当前仓库已实现并测试以下独立基础组件：Tensor 教学代码、顺序文本窗口 Dataset、字符级 Tokenizer、Token Embedding、Position Embedding、Single-Head 与 Multi-Head Causal Self-Attention、逐 Token 执行 `C → 4C → GELU → C` 特征变换的 Feed-Forward Network，以及 Residual Connection 和手写 Layer Normalization。
+当前仓库已实现并测试 Tensor 教学代码、顺序文本窗口 Dataset、字符级 Tokenizer、Token 与 Position Embedding、Single-Head 与 Multi-Head Causal Self-Attention、Feed-Forward Network、Residual Connection 和手写 Layer Normalization。这些模型组件已经按 Pre-Norm 顺序组合成单个 Decoder Transformer Block：
 
-当前 Attention、Feed-Forward Network、Residual Connection 与 Layer Normalization 仍是独立组件，还没有组合成 Transformer Block。仓库尚未实现 Decoder Stack、Language Model Head、完整模型、Loss、Optimizer 驱动的训练循环、Checkpoint 或推理生成流程，也没有为这些未来能力创建占位模块。
+```text
+X → LayerNorm → Causal Attention → Residual
+  → LayerNorm → Feed-Forward     → Residual → Output
+```
+
+当前尚未实现多个 Block 组成的 Decoder Stack、Language Model Head、完整模型、Loss、Optimizer 驱动的训练循环、Checkpoint 或推理生成流程，也没有为这些未来能力创建占位模块。
