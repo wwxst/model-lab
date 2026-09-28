@@ -5,6 +5,11 @@
 ```text
 English Term         ｜中文术语          ｜中文解释
 Model                ｜模型              ｜根据输入计算输出的一组结构和参数
+Decoder-only Model   ｜仅解码器模型      ｜只使用因果 Decoder 结构预测后续 Token 的语言模型
+Forward Pass         ｜前向传播          ｜输入依次经过模型组件并产生输出的计算过程
+Final Normalization  ｜最终归一化        ｜Decoder Stack 之后、Language Model Head 之前的 Layer Normalization
+Model Context        ｜模型上下文        ｜一次前向传播最多能够接收的 Token 序列范围
+End-to-End Pipeline  ｜端到端链路        ｜从 Token IDs 输入到 Logits 输出的完整连接关系
 Parameter            ｜参数              ｜模型在训练中通过梯度更新的数值
 Token                ｜词元              ｜模型实际读取和预测的离散文本单位
 Vocabulary           ｜词表              ｜模型能够识别的全部 Token 集合

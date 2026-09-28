@@ -43,4 +43,4 @@ py -3.14 -m venv .venv
 
 ## 项目状态
 
-Language Model Head（语言模型输出头）。当前已能把 Decoder Stack 的 `[B,T,C]` Hidden State（隐藏状态）通过无偏置线性投影转换为 `[B,T,V]` Logits（未归一化分数）。详细内容见 [`docs/language-model-head.md`](docs/language-model-head.md)。Token/Position Embedding、Decoder Stack 与 Head 尚未组合成完整模型，Loss、训练循环和生成逻辑也尚未实现。
+Complete Decoder-only Model（完整仅解码器模型）。当前已将 Token Embedding、Position Embedding、多个 Pre-Norm Transformer Block 组成的 Decoder Stack、Final Layer Normalization 和 Language Model Head 连接成 `Token IDs [B,T] → Logits [B,T,V]` 的完整前向链路。详细内容见 [`docs/decoder-only-model.md`](docs/decoder-only-model.md)。Cross Entropy Loss、训练循环、Checkpoint 和生成逻辑尚未实现。
