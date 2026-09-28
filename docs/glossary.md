@@ -70,6 +70,12 @@ Gradient             ｜梯度              ｜表示参数变化会如何影响
 Optimizer            ｜优化器            ｜根据梯度更新模型参数的算法
 Checkpoint           ｜检查点            ｜训练过程中保存的模型参数及相关状态
 Training             ｜训练              ｜使用数据和损失反复更新模型参数的过程
+Training Loop        ｜训练循环          ｜重复执行前向、损失、反向和参数更新的过程
+Epoch                ｜训练轮次          ｜完整遍历一次训练 DataLoader 的过程
+Zero Gradient        ｜梯度清零          ｜在新 Batch 反向传播前清除上一次参数梯度
+Optimizer Step       ｜优化器更新        ｜根据当前梯度修改模型参数的一次操作
+Parameter Update     ｜参数更新          ｜训练中让模型参数朝降低 Loss 的方向变化
+Token-weighted Mean  ｜按 Token 加权平均 ｜按各 Batch 的 Target Token 数合并平均 Loss
 Inference            ｜推理              ｜使用训练后的模型计算预测结果的过程
 Transformer          ｜Transformer 架构  ｜通过注意力等结构处理序列的一类神经网络架构
 Transformer Block    ｜Transformer 模块  ｜组合 Attention、MLP、Normalization 和 Residual 的基本计算单元
