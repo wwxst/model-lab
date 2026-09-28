@@ -83,4 +83,4 @@ Batch Input / Target
 当前尚未实现 Checkpoint 或推理生成流程；这些未来能力没有占位模块。
 Checkpoint 已能保存和恢复模型参数、Optimizer 状态和已完成 Epoch 编号。恢复时由调用者先创建结构相同的模型和 Optimizer，再加载状态。
 
-当前尚未实现自动保存策略或推理生成流程；这些未来能力没有占位模块。
+Autoregressive Generation 已能在 `torch.no_grad()` 下逐步读取最后位置 Logits，使用 Greedy `argmax` 追加 Token，并在每步将上下文裁剪到模型最大长度。Checkpoint、训练和生成均为独立职责，生成不修改模型参数。

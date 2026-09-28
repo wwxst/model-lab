@@ -43,4 +43,4 @@ py -3.14 -m venv .venv
 
 ## 项目状态
 
-Checkpoint（检查点）。当前已能保存和恢复完整模型的 `model_state_dict`、Optimizer 的 `optimizer_state_dict` 和已完成 Epoch 编号，支持在相同模型结构上继续训练。详细内容见 [`docs/checkpoint.md`](docs/checkpoint.md)。自动保存策略和生成逻辑尚未实现。
+Autoregressive Generation（自回归生成）。当前已能从 `[B,T]` Token IDs 开始，以 Greedy Decoding（贪心解码）逐步追加 Token，并在超过模型上下文时裁剪输入窗口。详细内容见 [`docs/autoregressive-generation.md`](docs/autoregressive-generation.md)。当前不包含采样策略、KV Cache 或流式输出。
