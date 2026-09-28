@@ -43,4 +43,4 @@ py -3.14 -m venv .venv
 
 ## 项目状态
 
-Cross Entropy Loss（交叉熵损失）。当前完整 Decoder-only Model 输出 `[B,T,V]` Logits，并可通过可读实现的 `log_softmax → gather target → negative mean` 计算 next-token prediction 的标量平均损失和完整模型梯度。详细内容见 [`docs/cross-entropy-loss.md`](docs/cross-entropy-loss.md)。Optimizer 驱动的训练循环、Checkpoint 和生成逻辑尚未实现。
+Training Loop（训练循环）。当前已把 Dataset、DataLoader、完整 Decoder-only Model、Cross Entropy Loss、Autograd 和 PyTorch Optimizer 连接成一次完整训练 Epoch，能够执行梯度清零、前向传播、反向传播和参数更新。详细内容见 [`docs/training-loop.md`](docs/training-loop.md)。Checkpoint 和生成逻辑尚未实现。

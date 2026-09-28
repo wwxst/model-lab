@@ -68,6 +68,16 @@ Token IDs [B,T]
 → Logits
 ```
 
-Cross Entropy Loss 已能使用模型的 `[B,T,V]` Logits 和 Dataset 的 `[B,T]` Target IDs 计算标量平均损失，并通过 Autograd 将梯度传回全部模型参数。
+Cross Entropy Loss 能使用模型的 `[B,T,V]` Logits 和 Dataset 的 `[B,T]` Target IDs 计算标量平均损失，并通过 Autograd 将梯度传回全部模型参数。`train_epoch` 已将 DataLoader、模型、Loss、Backward 和调用者提供的 PyTorch Optimizer 连接为可执行训练链路：
 
-当前尚未实现 Optimizer 驱动的训练循环、Checkpoint 或推理生成流程；这些未来能力没有占位模块。
+```text
+Batch Input / Target
+→ zero_grad
+→ Model Forward
+→ Cross Entropy Loss
+→ Backward
+→ Optimizer Step
+→ Parameter Update
+```
+
+当前尚未实现 Checkpoint 或推理生成流程；这些未来能力没有占位模块。
