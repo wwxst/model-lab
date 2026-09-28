@@ -43,4 +43,4 @@ py -3.14 -m venv .venv
 
 ## 项目状态
 
-MLP / Feed-Forward Network（多层感知机 / 前馈网络）。当前已具备 Python 与 PyTorch 环境基础、可执行且可测试的 Tensor 教学代码、顺序文本窗口 Dataset、字符级文本到 Token ID 的可逆转换、Token 与 Position Embedding（位置嵌入）、可观察每个 Head 注意力权重的多头因果自注意力，以及逐 Token 执行 `C → 4C → GELU → C` 特征变换的前馈网络。详细内容见 [`docs/feed-forward-network.md`](docs/feed-forward-network.md)。Residual Connection、Normalization、完整 Transformer、训练循环和生成逻辑尚未实现。
+Residual Connection + Normalization（残差连接与归一化）。当前已具备 Python 与 PyTorch 环境基础、可执行且可测试的 Tensor 教学代码、顺序文本窗口 Dataset、字符级文本到 Token ID 的可逆转换、Token 与 Position Embedding（位置嵌入）、多头因果自注意力、逐 Token 前馈网络，以及可读实现的残差连接和 Layer Normalization（层归一化）。详细内容见 [`docs/residual-normalization.md`](docs/residual-normalization.md)。Transformer Block、完整模型、训练循环和生成逻辑尚未实现。
