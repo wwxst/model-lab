@@ -60,6 +60,12 @@ Sequence             ｜序列              ｜按顺序排列的一串 Token
 Logits               ｜未归一化分数      ｜模型为各候选 Token 输出的原始分数
 Probability          ｜概率              ｜归一化后表示各候选结果可能性的数值
 Loss                 ｜损失              ｜衡量模型预测与正确目标之间差距的数值
+Cross Entropy Loss   ｜交叉熵损失        ｜衡量模型预测分布与正确 Token 之间差距的损失
+Log Probability      ｜对数概率          ｜概率取自然对数后的数值
+Log Softmax          ｜对数 Softmax      ｜以数值稳定方式把 Logits 转换为对数概率
+Negative Log-Likelihood｜负对数似然      ｜正确 Token 对数概率的负值
+Gather               ｜按索引选取        ｜根据 Target ID 取得对应词表位置数值的操作
+Reduction            ｜归约              ｜把多个位置的损失合并为一个标量的过程
 Gradient             ｜梯度              ｜表示参数变化会如何影响损失的数值
 Optimizer            ｜优化器            ｜根据梯度更新模型参数的算法
 Checkpoint           ｜检查点            ｜训练过程中保存的模型参数及相关状态
