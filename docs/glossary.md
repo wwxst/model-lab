@@ -61,6 +61,11 @@ Checkpoint           ｜检查点            ｜训练过程中保存的模型�
 Training             ｜训练              ｜使用数据和损失反复更新模型参数的过程
 Inference            ｜推理              ｜使用训练后的模型计算预测结果的过程
 Transformer          ｜Transformer 架构  ｜通过注意力等结构处理序列的一类神经网络架构
+Transformer Block    ｜Transformer 模块  ｜组合 Attention、MLP、Normalization 和 Residual 的基本计算单元
+Sublayer             ｜子层              ｜Block 内承担一种计算职责的 Attention 或 Feed-Forward 组件
+Pre-Norm             ｜前置归一化        ｜在输入进入每个子层之前执行 Layer Normalization
+Residual Path        ｜残差路径          ｜让子层输入绕过子层并直接加到输出上的路径
+Hidden State         ｜隐藏状态          ｜Token 在模型内部逐层更新的连续向量表示
 Feed-Forward Network ｜前馈网络          ｜对每个 Token 的特征独立执行两层线性变换的网络
 MLP                  ｜多层感知机        ｜由线性层和非线性激活函数组成的前馈结构
 Expansion Dimension  ｜扩展维度          ｜前馈网络中间层扩展后的特征数量，当前固定为嵌入维度的四倍

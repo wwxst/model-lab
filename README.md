@@ -43,4 +43,4 @@ py -3.14 -m venv .venv
 
 ## 项目状态
 
-Residual Connection + Normalization（残差连接与归一化）。当前已具备 Python 与 PyTorch 环境基础、可执行且可测试的 Tensor 教学代码、顺序文本窗口 Dataset、字符级文本到 Token ID 的可逆转换、Token 与 Position Embedding（位置嵌入）、多头因果自注意力、逐 Token 前馈网络，以及可读实现的残差连接和 Layer Normalization（层归一化）。详细内容见 [`docs/residual-normalization.md`](docs/residual-normalization.md)。Transformer Block、完整模型、训练循环和生成逻辑尚未实现。
+Transformer Block（Transformer 模块）。当前已把 Layer Normalization（层归一化）、多头因果自注意力、逐 Token 前馈网络和两条 Residual Connection（残差连接）按 Pre-Norm（前置归一化）顺序组合为可执行、可测试的 Decoder Block。详细内容见 [`docs/transformer-block.md`](docs/transformer-block.md)。Decoder Stack、完整模型、训练循环和生成逻辑尚未实现。
