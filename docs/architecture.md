@@ -81,3 +81,6 @@ Batch Input / Target
 ```
 
 当前尚未实现 Checkpoint 或推理生成流程；这些未来能力没有占位模块。
+Checkpoint 已能保存和恢复模型参数、Optimizer 状态和已完成 Epoch 编号。恢复时由调用者先创建结构相同的模型和 Optimizer，再加载状态。
+
+当前尚未实现自动保存策略或推理生成流程；这些未来能力没有占位模块。

@@ -24,12 +24,12 @@ Commit 14 Language Model Head
 Commit 15 Complete Decoder-only Model
 Commit 16 Cross Entropy Loss
 Commit 17 Training Loop
+Commit 18 Checkpoint
 ```
 
 后续计划按以下顺序逐步组合完整的 Decoder-only Transformer，建立训练与推理能力。以下项目仍是未来方向，不代表当前已经实现；每个 Commit 的具体模块边界和验收标准仍在进入该 Commit 时确定。
 
 ```text
-Commit 18 Checkpoint
 Commit 19 Autoregressive Generation
 ```
 
@@ -47,4 +47,4 @@ Commit 19 Autoregressive Generation
 
 ## Current Status
 
-当前阶段为 Training Loop（训练循环）。仓库已把 DataLoader、完整模型、Cross Entropy Loss、Backward 和 PyTorch Optimizer 连接成可执行训练 Epoch，能够真实更新参数并降低微型数据上的 Loss；尚未实现 Checkpoint 或生成能力。
+当前阶段为 Checkpoint（检查点）。仓库已能保存和恢复模型参数、Optimizer 状态和已完成 Epoch 编号，支持在相同结构上继续训练；尚未实现自动保存策略或生成能力。
