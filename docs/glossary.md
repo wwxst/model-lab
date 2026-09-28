@@ -66,6 +66,10 @@ Sublayer             ｜子层              ｜Block 内承担一种计算职责
 Pre-Norm             ｜前置归一化        ｜在输入进入每个子层之前执行 Layer Normalization
 Residual Path        ｜残差路径          ｜让子层输入绕过子层并直接加到输出上的路径
 Hidden State         ｜隐藏状态          ｜Token 在模型内部逐层更新的连续向量表示
+Language Model Head  ｜语言模型输出头    ｜把隐藏状态投影为词表中每个 Token 的 Logits
+Vocabulary Dimension｜词表维度          ｜输出最后一维的大小，等于词表中的 Token 数量
+Raw Score            ｜原始分数          ｜Softmax 之前可以为任意实数的模型输出
+Weight Tying         ｜权重绑定          ｜让输出投影与 Token Embedding 共享同一参数表的做法
 Decoder Stack        ｜解码器堆叠        ｜按顺序连接多个 Decoder Transformer Block 的结构
 Layer                ｜层                ｜Stack 中一个具有独立参数的 Transformer Block
 Depth                ｜深度              ｜Stack 包含的 Transformer Block 数量
