@@ -57,6 +57,15 @@ X → LayerNorm → Causal Attention → Residual
 
 多个 Block 已通过 `DecoderStack` 顺序连接。每层结构相同但参数独立，前一层的 `[B,T,C]` 输出直接成为后一层输入，整个 Stack 仍保持相同 shape 和因果行为。
 
-Language Model Head 已作为独立组件实现，能把 Decoder Stack 的 `[B,T,C]` Hidden State 线性投影为 `[B,T,V]` Logits，不执行 Softmax。
+Language Model Head 能把 Decoder Stack 的 `[B,T,C]` Hidden State 线性投影为 `[B,T,V]` Logits，不执行 Softmax。Token/Position Embedding、Decoder Stack、Final Layer Normalization 与 Language Model Head 已组合成完整模型前向链路：
 
-当前尚未把 Token/Position Embedding、Decoder Stack 与 Language Model Head 组合成完整模型，也未实现 Loss、Optimizer 驱动的训练循环、Checkpoint 或推理生成流程；这些未来能力没有占位模块。
+```text
+Token IDs [B,T]
+→ Token Embedding + Position Embedding [B,T,C]
+→ Decoder Stack [B,T,C]
+→ Final Layer Normalization [B,T,C]
+→ Language Model Head [B,T,V]
+→ Logits
+```
+
+当前尚未实现 Loss、Optimizer 驱动的训练循环、Checkpoint 或推理生成流程；这些未来能力没有占位模块。
