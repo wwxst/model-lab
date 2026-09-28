@@ -25,6 +25,7 @@ Commit 15 Complete Decoder-only Model
 Commit 16 Cross Entropy Loss
 Commit 17 Training Loop
 Commit 18 Checkpoint
+Commit 19 Autoregressive Generation
 ```
 
 后续计划按以下顺序逐步组合完整的 Decoder-only Transformer，建立训练与推理能力。以下项目仍是未来方向，不代表当前已经实现；每个 Commit 的具体模块边界和验收标准仍在进入该 Commit 时确定。
@@ -47,4 +48,4 @@ Commit 19 Autoregressive Generation
 
 ## Current Status
 
-当前阶段为 Checkpoint（检查点）。仓库已能保存和恢复模型参数、Optimizer 状态和已完成 Epoch 编号，支持在相同结构上继续训练；尚未实现自动保存策略或生成能力。
+当前阶段为 Autoregressive Generation（自回归生成）。仓库已能从 Token IDs 以 Greedy argmax 逐步追加 Token，并在每步遵守模型上下文长度；当前不包含采样策略、KV Cache 或流式输出。

@@ -81,6 +81,12 @@ Optimizer Step       ｜优化器更新        ｜根据当前梯度修改模型
 Parameter Update     ｜参数更新          ｜训练中让模型参数朝降低 Loss 的方向变化
 Token-weighted Mean  ｜按 Token 加权平均 ｜按各 Batch 的 Target Token 数合并平均 Loss
 Inference            ｜推理              ｜使用训练后的模型计算预测结果的过程
+Autoregressive       ｜自回归            ｜使用已经生成的序列逐步预测下一个 Token 的过程
+Generation           ｜生成              ｜从输入上下文计算并追加新 Token 的推理过程
+Greedy Decoding      ｜贪心解码          ｜每一步选择当前 Logit 最大的 Token
+Next Token           ｜下一个词元        ｜当前序列之后新增的一个 Token
+Context Window       ｜上下文窗口        ｜模型单次前向传播能够看到的 Token 范围
+Inference Mode       ｜推理模式          ｜不建立反向计算图、只执行预测的运行方式
 Transformer          ｜Transformer 架构  ｜通过注意力等结构处理序列的一类神经网络架构
 Transformer Block    ｜Transformer 模块  ｜组合 Attention、MLP、Normalization 和 Residual 的基本计算单元
 Sublayer             ｜子层              ｜Block 内承担一种计算职责的 Attention 或 Feed-Forward 组件
