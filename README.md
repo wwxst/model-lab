@@ -129,6 +129,28 @@ Epoch。每完成一个 Epoch，更新后的累计训练状态都会保存回同
 恢复训练时仍保持原来的数据模式。
 样本格式、回答损失和验收边界见 [`docs/question-answer-training.md`](docs/question-answer-training.md)。
 
+## 换一种问法的实验
+
+`examples/qa_paraphrases_train.jsonl` 为同一知识点提供不同表达，并加入没有明确
+国家时请求补充信息的首都问题。`examples/qa_paraphrases_test.jsonl` 是独立的
+未见问法测试集，不能用于这次实验的训练。
+
+从零训练一个单独的模型：
+
+```powershell
+.venv\Scripts\python.exe -X utf8 scripts\train_chat.py --data-format qa --data examples\qa_paraphrases_train.jsonl --epochs 200 --learning-rate 0.003 --context-length 32 --batch-size 16 --checkpoint checkpoints\qa-paraphrases.pt
+```
+
+训练后打开提问界面：
+
+```powershell
+.venv\Scripts\python.exe -X utf8 scripts\ask_chat.py --checkpoint checkpoints\qa-paraphrases.pt
+```
+
+先检查训练文件中的问题，再检查测试文件中不同写法的问题，分别记录正确数量。
+答案判定采用与预期答案完全一致的标准，不能只检查生成内容是否包含几个关键词。
+这个实验只覆盖已有知识点的有限表达，不代表通用聊天能力。
+
 ## 项目状态
 
 Autoregressive Generation（自回归生成）。当前已能从 `[B,T]` Token IDs 开始，以 Greedy Decoding（贪心解码）逐步追加 Token，并在超过模型上下文时裁剪输入窗口。详细内容见 [`docs/autoregressive-generation.md`](docs/autoregressive-generation.md)。当前不包含采样策略、KV Cache 或流式输出。
