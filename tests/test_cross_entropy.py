@@ -139,3 +139,24 @@ def test_loss_rejects_empty_vocabulary() -> None:
             torch.empty(2, 3, 0),
             torch.zeros(2, 3, dtype=torch.int64),
         )
+
+
+def test_ignored_targets_match_reference_and_have_zero_logit_gradient() -> None:
+    logits = torch.tensor(
+        [[[2.0, 1.0, 0.0], [0.0, 1.0, 2.0], [1.0, 2.0, 3.0]]],
+        requires_grad=True,
+    )
+    targets = torch.tensor([[-100, 2, -100]])
+    loss = cross_entropy_loss(logits, targets)
+    expected = functional.cross_entropy(logits.reshape(-1, 3), targets.reshape(-1))
+
+    assert torch.allclose(loss, expected)
+    loss.backward()
+    assert logits.grad is not None
+    assert torch.equal(logits.grad[:, [0, 2]], torch.zeros(1, 2, 3))
+    assert not torch.equal(logits.grad[:, 1], torch.zeros(1, 3))
+
+
+def test_loss_rejects_batch_without_supervised_targets() -> None:
+    with pytest.raises(ValueError, match="supervised Token"):
+        cross_entropy_loss(torch.zeros(1, 2, 3), torch.full((1, 2), -100))

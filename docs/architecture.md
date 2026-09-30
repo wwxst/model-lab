@@ -80,7 +80,13 @@ Batch Input / Target
 → Parameter Update
 ```
 
-当前尚未实现 Checkpoint 或推理生成流程；这些未来能力没有占位模块。
 Checkpoint 已能保存和恢复模型参数、Optimizer 状态和已完成 Epoch 编号。恢复时由调用者先创建结构相同的模型和 Optimizer，再加载状态。
 
 Autoregressive Generation 已能在 `torch.no_grad()` 下逐步读取最后位置 Logits，使用 Greedy `argmax` 追加 Token，并在每步将上下文裁剪到模型最大长度。Checkpoint、训练和生成均为独立职责，生成不修改模型参数。
+
+训练入口同时支持连续文本模式和独立问答模式。问答模式由
+`QuestionAnswerDataset` 将各条问题/回答分别展开为回答前缀预测样本，批处理在
+右侧补齐；Cross Entropy 与 Epoch 平均值忽略目标为 `-100` 的位置。
+训练入口将数据模式、固定词表、模型配置和文本指纹写入 Checkpoint 元数据。
+终端提问入口读取保存的词表和配置，调用现有模型与贪心生成函数。
+问答样本的数学过程见 [`question-answer-training.md`](question-answer-training.md)。

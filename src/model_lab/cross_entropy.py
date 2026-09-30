@@ -6,7 +6,7 @@ import torch
 
 
 def cross_entropy_loss(logits: torch.Tensor, target_ids: torch.Tensor) -> torch.Tensor:
-    """用 [B, T, V] Logits 和 [B, T] targets 返回标量平均损失。"""
+    """返回 [B, T, V] Logits 对 [B, T] 非 -100 targets 的平均损失。"""
 
     if logits.ndim != 3:
         raise ValueError("logits must have shape [B, T, V]")
@@ -23,6 +23,11 @@ def cross_entropy_loss(logits: torch.Tensor, target_ids: torch.Tensor) -> torch.
     if logits.shape[2] <= 0:
         raise ValueError("vocabulary size must be greater than zero")
 
+    # -100 是回答训练和右侧补齐使用的忽略标签；只有真实监督位置参与平均。
+    supervised = target_ids != -100
+    if not supervised.any():
+        raise ValueError("targets must contain at least one supervised Token")
+
     # V = Vocabulary Size（词表大小）。log_softmax 沿 V 维把每个位置的
     # 原始 Logits 转换为对数概率；它比先 softmax 再 log 更稳定。
     log_probabilities = torch.log_softmax(logits, dim=-1)
@@ -31,9 +36,9 @@ def cross_entropy_loss(logits: torch.Tensor, target_ids: torch.Tensor) -> torch.
     # gather 为每个位置选出正确 Token 对应的一个对数概率。
     target_log_probabilities = log_probabilities.gather(
         dim=-1,
-        index=target_ids.unsqueeze(dim=-1),
+        index=target_ids.masked_fill(~supervised, 0).unsqueeze(dim=-1),
     ).squeeze(dim=-1)
 
     # Negative Log-Likelihood（负对数似然）对正确 Token 的 log probability
-    # 取负，再对 Batch 和 Sequence 中的全部预测位置求平均，得到标量 Loss。
-    return -target_log_probabilities.mean()
+    # 取负，再对实际监督位置求平均，得到标量 Loss。
+    return -target_log_probabilities[supervised].mean()

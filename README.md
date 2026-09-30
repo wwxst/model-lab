@@ -102,6 +102,33 @@ Epoch。每完成一个 Epoch，更新后的累计训练状态都会保存回同
 .venv\Scripts\python.exe scripts\train_chat.py --help
 ```
 
+## 独立问答实验
+
+仓库提供 `examples/qa_basics.jsonl`，包含五个简单知识点及部分提问写法。
+使用 `qa` 模式，从零训练一个单独的实验模型：
+
+```powershell
+.venv\Scripts\python.exe -X utf8 scripts\train_chat.py --data-format qa --data examples\qa_basics.jsonl --epochs 200 --learning-rate 0.003 --context-length 32 --batch-size 16 --checkpoint checkpoints\qa-answer-only.pt
+```
+
+训练完成后提问：
+
+```powershell
+.venv\Scripts\python.exe -X utf8 scripts\ask_chat.py --checkpoint checkpoints\qa-answer-only.pt
+```
+
+输入问题后按回车，输入 `/exit` 退出。每道问题独立回答，不保留多轮对话历史。
+也可以一次只问一题：
+
+```powershell
+.venv\Scripts\python.exe -X utf8 scripts\ask_chat.py --checkpoint checkpoints\qa-answer-only.pt --question "水的化学式是什么"
+```
+
+继续训练时使用 `--resume checkpoints\qa-answer-only.pt --epochs 20`。
+已保存词表和模型配置的普通文本模型也可以通过同一个提问脚本加载，
+恢复训练时仍保持原来的数据模式。
+样本格式、回答损失和验收边界见 [`docs/question-answer-training.md`](docs/question-answer-training.md)。
+
 ## 项目状态
 
 Autoregressive Generation（自回归生成）。当前已能从 `[B,T]` Token IDs 开始，以 Greedy Decoding（贪心解码）逐步追加 Token，并在超过模型上下文时裁剪输入窗口。详细内容见 [`docs/autoregressive-generation.md`](docs/autoregressive-generation.md)。当前不包含采样策略、KV Cache 或流式输出。

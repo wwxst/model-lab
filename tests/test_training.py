@@ -125,3 +125,21 @@ def test_tokenizer_dataset_dataloader_and_training_form_complete_pipeline() -> N
 
     assert math.isfinite(loss)
     assert loss > 0
+
+
+def test_epoch_loss_weights_only_supervised_tokens() -> None:
+    model = ConstantLogitModel()
+    optimizer = SGD(model.parameters(), lr=0.0)
+    inputs = torch.zeros(1, 3, dtype=torch.int64)
+    first_targets = torch.tensor([[-100, -100, 0]])
+    second_targets = torch.tensor([[-100, 2, 2]])
+    first_loss = cross_entropy_loss(model(inputs), first_targets).item()
+    second_loss = cross_entropy_loss(model(inputs), second_targets).item()
+
+    loss = train_epoch(
+        model,
+        [(inputs, first_targets), (inputs, second_targets)],
+        optimizer,
+        "cpu",
+    )
+    assert loss == pytest.approx((first_loss + 2 * second_loss) / 3)

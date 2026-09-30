@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
 from pathlib import Path
 
 import torch
@@ -17,6 +18,10 @@ from model_lab.checkpoint import (
     save_checkpoint,
 )
 from model_lab.decoder_model import DecoderOnlyLanguageModel
+from model_lab.question_answer_dataset import (
+    QuestionAnswerDataset,
+    collate_question_answers,
+)
 from model_lab.text_dataset import TextSequenceDataset
 from model_lab.training import train_epoch
 
@@ -39,6 +44,11 @@ def parse_args() -> argparse.Namespace:
         help="Checkpoint 输出路径",
     )
     parser.add_argument("--resume", type=Path, help="从已有 Checkpoint 继续训练")
+    parser.add_argument(
+        "--data-format",
+        choices=["text", "qa"],
+        help="text 为连续文本；qa 为每行一条 question/answer 的 JSONL",
+    )
     parser.add_argument("--epochs", type=int, default=1, help="本次新增训练轮数")
     parser.add_argument("--max-characters", type=int, default=None)
     parser.add_argument("--context-length", type=int, default=None)
@@ -69,13 +79,18 @@ def main() -> None:
         saved_metadata = load_checkpoint_metadata(args.resume, map_location="cpu")
 
     if saved_metadata is None:
+        data_format = args.data_format or "text"
         data_path = args.data or DEFAULT_DATA_PATH
         if args.resume is not None and args.max_characters is None:
             raise ValueError(
                 "旧格式 Checkpoint 没有训练配置；第一次继续训练时必须提供"
                 " --max-characters，并保持原来的模型参数。"
             )
-        max_characters = 10_000 if args.max_characters is None else args.max_characters
+        max_characters = (
+            (0 if data_format == "qa" else 10_000)
+            if args.max_characters is None
+            else args.max_characters
+        )
         model_config = {
             "context_length": 64
             if args.context_length is None
@@ -95,6 +110,9 @@ def main() -> None:
 
         data_path = args.data or Path(str(data_metadata["path"]))
         max_characters = int(data_metadata["max_characters"])
+        data_format = data_metadata.get("format", "text")
+        if args.data_format is not None and args.data_format != data_format:
+            raise ValueError("继续训练不能修改 data-format")
         if args.max_characters is not None and args.max_characters != max_characters:
             raise ValueError("继续训练不能修改 max-characters")
 
@@ -120,6 +138,8 @@ def main() -> None:
 
     if max_characters < 0:
         raise ValueError("max-characters must not be negative")
+    if data_format == "qa" and max_characters != 0:
+        raise ValueError("qa 模式必须读取完整 JSONL，使用 --max-characters 0")
 
     text = data_path.read_text(encoding="utf-8")
     available_characters = len(text)
@@ -134,20 +154,48 @@ def main() -> None:
         if text_sha256 != data_metadata["text_sha256"]:
             raise ValueError("训练文本与 Checkpoint 保存的文本不一致")
 
+    records: list[tuple[str, str]] = []
+    if data_format == "qa":
+        for line in text.splitlines():
+            if not line.strip():
+                continue
+            record = json.loads(line)
+            question, answer = record["question"], record["answer"]
+            if not isinstance(question, str) or not isinstance(answer, str):
+                raise ValueError("JSONL question and answer must be strings")
+            records.append((question, answer))
+        vocabulary_text = "".join(
+            f"用户：{question}\n助手：{answer}\n\n" for question, answer in records
+        )
+    else:
+        vocabulary_text = text
+
     tokenizer = (
-        CharacterTokenizer.from_text(text)
+        CharacterTokenizer.from_text(vocabulary_text)
         if tokenizer_characters is None
         else CharacterTokenizer(tokenizer_characters)
     )
-    token_ids = tokenizer.encode(text)
-    dataset = TextSequenceDataset(token_ids, model_config["context_length"])
-
     torch.manual_seed(0)
-    data_loader = DataLoader(
-        dataset,
-        batch_size=args.batch_size,
-        shuffle=True,
-    )
+    if data_format == "qa":
+        qa_dataset = QuestionAnswerDataset(
+            records, tokenizer, model_config["context_length"]
+        )
+        sample_count = len(qa_dataset)
+        data_loader = DataLoader(
+            qa_dataset,
+            batch_size=args.batch_size,
+            shuffle=True,
+            collate_fn=collate_question_answers,
+        )
+    else:
+        token_ids = tokenizer.encode(text)
+        text_dataset = TextSequenceDataset(token_ids, model_config["context_length"])
+        sample_count = len(text_dataset)
+        data_loader = DataLoader(
+            text_dataset,
+            batch_size=args.batch_size,
+            shuffle=True,
+        )
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = DecoderOnlyLanguageModel(
@@ -171,7 +219,10 @@ def main() -> None:
     print(f"训练数据：{data_path}")
     print(f"使用字符：{len(text):,} / {available_characters:,}")
     print(f"词表大小：{tokenizer.vocab_size:,}")
-    print(f"训练窗口：{len(dataset):,}")
+    print(f"训练模式：{data_format}")
+    print(f"训练样本：{sample_count:,}")
+    if data_format == "qa":
+        print(f"独立问答：{len(records):,}")
     print(f"模型参数：{sum(parameter.numel() for parameter in model.parameters()):,}")
     print(f"训练设备：{device}")
     if args.resume is not None:
@@ -181,6 +232,7 @@ def main() -> None:
         "format_version": 1,
         "data": {
             "path": str(data_path),
+            "format": data_format,
             "max_characters": max_characters,
             "text_sha256": text_sha256,
         },

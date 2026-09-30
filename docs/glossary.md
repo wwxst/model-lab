@@ -152,4 +152,8 @@ Next-token Prediction｜下一位置预测      ｜根据当前位置学习预�
 Training Set         ｜训练集            ｜用于学习模型参数的数据部分
 Validation Set       ｜验证集            ｜用于检查模型表现的数据部分
 Sliding Window       ｜滑动窗口          ｜沿序列逐位置移动的固定长度取样范围
+Answer-only Loss     ｜仅回答损失        ｜只对回答字符计算预测误差
+Prefix               ｜已知前缀          ｜问题和已经生成的回答字符
+Ignored Target       ｜忽略标签          ｜值为 -100、不参与平均损失的位置
+Right Padding        ｜右侧补齐          ｜在前缀右侧补齐同一批次的长度
 ```
