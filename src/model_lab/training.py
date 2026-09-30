@@ -42,9 +42,10 @@ def train_epoch(
         loss.backward()
         optimizer.step()
 
-        # 每个 Batch 的 loss 是该 Batch 内全部 Token 的平均值。乘回 Token 数
+        # 每个 Batch 的 loss 是该 Batch 内监督 Token 的平均值。乘回 Token 数
         # 后累加，最后再除以总 Token 数，避免较小的末尾 Batch 获得相同权重。
-        token_count = target_ids.numel()
+        # 问答样本中的 -100 是不参与学习的问题位置或补齐位置。
+        token_count = (target_ids != -100).sum().item()
         total_loss += loss.detach().item() * token_count
         total_tokens += token_count
 

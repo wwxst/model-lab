@@ -1,3 +1,4 @@
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -169,3 +170,98 @@ def test_train_chat_script_upgrades_old_checkpoint_on_resume(tmp_path: Path) -> 
     upgraded_checkpoint = torch.load(checkpoint_path, weights_only=False)
     assert upgraded_checkpoint["epoch"] == 2
     assert upgraded_checkpoint["metadata"]["format_version"] == 1
+
+
+def test_qa_training_resumes_saved_mode_and_cli_loads_model(tmp_path: Path) -> None:
+    data = tmp_path / "qa.jsonl"
+    data.write_text(
+        json.dumps({"question": "你好", "answer": "你好！"}) + "\n",
+        encoding="utf-8",
+    )
+    checkpoint = tmp_path / "qa.pt"
+    root = Path(__file__).parents[1]
+    subprocess.run(
+        [
+            sys.executable,
+            "scripts/train_chat.py",
+            "--data-format",
+            "qa",
+            "--data",
+            str(data),
+            "--checkpoint",
+            str(checkpoint),
+            "--context-length",
+            "16",
+            "--embedding-dim",
+            "8",
+            "--num-heads",
+            "2",
+            "--num-layers",
+            "1",
+        ],
+        cwd=root,
+        capture_output=True,
+        check=True,
+    )
+    subprocess.run(
+        [sys.executable, "scripts/train_chat.py", "--resume", str(checkpoint)],
+        cwd=root,
+        capture_output=True,
+        check=True,
+    )
+    saved = torch.load(checkpoint, weights_only=False)
+    assert saved["epoch"] == 2
+    assert saved["metadata"]["data"]["format"] == "qa"
+    assert saved["metadata"]["data"]["max_characters"] == 0
+
+    changed_mode = subprocess.run(
+        [
+            sys.executable,
+            "scripts/train_chat.py",
+            "--resume",
+            str(checkpoint),
+            "--data-format",
+            "text",
+        ],
+        cwd=root,
+        capture_output=True,
+        check=False,
+    )
+    assert changed_mode.returncode != 0
+    assert b"ValueError" in changed_mode.stderr
+
+    result = subprocess.run(
+        [
+            sys.executable,
+            "-X",
+            "utf8",
+            "scripts/ask_chat.py",
+            "--checkpoint",
+            str(checkpoint),
+            "--question",
+            "你好",
+        ],
+        cwd=root,
+        capture_output=True,
+        encoding="utf-8",
+        check=True,
+    )
+    assert "模型：" in result.stdout
+
+    unknown = subprocess.run(
+        [
+            sys.executable,
+            "-X",
+            "utf8",
+            "scripts/ask_chat.py",
+            "--checkpoint",
+            str(checkpoint),
+            "--question",
+            "未知字",
+        ],
+        cwd=root,
+        capture_output=True,
+        encoding="utf-8",
+        check=True,
+    )
+    assert "词表中没有这些字符" in unknown.stdout
