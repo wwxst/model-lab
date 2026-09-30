@@ -15,6 +15,7 @@ from model_lab.character_tokenizer import CharacterTokenizer
 from model_lab.checkpoint import (
     load_checkpoint,
     load_checkpoint_metadata,
+    load_model_weights,
     save_checkpoint,
 )
 from model_lab.decoder_model import DecoderOnlyLanguageModel
@@ -43,7 +44,13 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="Checkpoint 输出路径",
     )
-    parser.add_argument("--resume", type=Path, help="从已有 Checkpoint 继续训练")
+    initialization = parser.add_mutually_exclusive_group()
+    initialization.add_argument(
+        "--resume", type=Path, help="恢复模型和优化器，在原数据上继续训练"
+    )
+    initialization.add_argument(
+        "--finetune", type=Path, help="只读取已有模型参数，在新数据上开始微调"
+    )
     parser.add_argument(
         "--data-format",
         choices=["text", "qa"],
@@ -64,6 +71,8 @@ def main() -> None:
     args = parse_args()
     if args.epochs <= 0:
         raise ValueError("epochs must be greater than zero")
+    if args.finetune is not None and (args.data is None or args.checkpoint is None):
+        raise ValueError("微调必须用 --data 指定新数据，用 --checkpoint 指定新文件")
 
     output_path = args.checkpoint or args.resume or DEFAULT_CHECKPOINT_PATH
     if args.resume is None and output_path.exists():
@@ -75,8 +84,11 @@ def main() -> None:
         raise FileExistsError(f"Checkpoint 输出文件已存在：{output_path}")
 
     saved_metadata = None
-    if args.resume is not None:
-        saved_metadata = load_checkpoint_metadata(args.resume, map_location="cpu")
+    source_path = args.resume or args.finetune
+    if source_path is not None:
+        saved_metadata = load_checkpoint_metadata(source_path, map_location="cpu")
+    if args.finetune is not None and saved_metadata is None:
+        raise ValueError("微调需要保存了词表和模型配置的 Checkpoint")
 
     if saved_metadata is None:
         data_format = args.data_format or "text"
@@ -108,13 +120,25 @@ def main() -> None:
         ):
             raise ValueError("Checkpoint 训练元数据格式错误")
 
-        data_path = args.data or Path(str(data_metadata["path"]))
-        max_characters = int(data_metadata["max_characters"])
-        data_format = data_metadata.get("format", "text")
-        if args.data_format is not None and args.data_format != data_format:
-            raise ValueError("继续训练不能修改 data-format")
-        if args.max_characters is not None and args.max_characters != max_characters:
-            raise ValueError("继续训练不能修改 max-characters")
+        if args.finetune is not None:
+            data_path = args.data
+            data_format = args.data_format or "text"
+            max_characters = (
+                (0 if data_format == "qa" else 10_000)
+                if args.max_characters is None
+                else args.max_characters
+            )
+        else:
+            data_path = args.data or Path(str(data_metadata["path"]))
+            max_characters = int(data_metadata["max_characters"])
+            data_format = data_metadata.get("format", "text")
+            if args.data_format is not None and args.data_format != data_format:
+                raise ValueError("继续训练不能修改 data-format")
+            if (
+                args.max_characters is not None
+                and args.max_characters != max_characters
+            ):
+                raise ValueError("继续训练不能修改 max-characters")
 
         model_config = {
             "context_length": int(saved_model_config["context_length"]),
@@ -130,7 +154,7 @@ def main() -> None:
         }
         for name, requested_value in requested_model_config.items():
             if requested_value is not None and requested_value != model_config[name]:
-                raise ValueError(f"继续训练不能修改 {name.replace('_', '-')}")
+                raise ValueError(f"加载已有模型不能修改 {name.replace('_', '-')}")
 
         tokenizer_characters = saved_metadata["tokenizer_characters"]
         if not isinstance(tokenizer_characters, list):
@@ -147,7 +171,7 @@ def main() -> None:
         text = text[:max_characters]
 
     text_sha256 = hashlib.sha256(text.encode("utf-8")).hexdigest()
-    if saved_metadata is not None:
+    if saved_metadata is not None and args.resume is not None:
         data_metadata = saved_metadata["data"]
         if not isinstance(data_metadata, dict):
             raise ValueError("Checkpoint data 元数据格式错误")
@@ -175,6 +199,14 @@ def main() -> None:
         if tokenizer_characters is None
         else CharacterTokenizer(tokenizer_characters)
     )
+    if args.finetune is not None:
+        # Token ID 必须保持原来的含义，否则已学到的嵌入和输出头会对应错字符。
+        unknown = sorted(set(vocabulary_text) - set(tokenizer.char_to_id))
+        if unknown:
+            raise ValueError(
+                f"微调数据包含原模型词表没有的字符：{''.join(unknown)}。"
+                "当前微调不扩展词表，请使用原词表覆盖的数据。"
+            )
     torch.manual_seed(0)
     if data_format == "qa":
         qa_dataset = QuestionAnswerDataset(
@@ -205,6 +237,9 @@ def main() -> None:
         num_heads=model_config["num_heads"],
         num_layers=model_config["num_layers"],
     ).to(device)
+    if args.finetune is not None:
+        # 继承所有层的参数，但新任务从新的优化器和 Epoch 1 开始学习。
+        load_model_weights(args.finetune, model, map_location=device)
     optimizer = AdamW(model.parameters(), lr=args.learning_rate)
 
     completed_epochs = 0
@@ -227,6 +262,8 @@ def main() -> None:
     print(f"训练设备：{device}")
     if args.resume is not None:
         print(f"继续训练：已完成 {completed_epochs} 个 Epoch")
+    if args.finetune is not None:
+        print(f"微调来源：{args.finetune}（继承模型参数，重新开始优化器和轮次）")
 
     metadata: dict[str, object] = {
         "format_version": 1,
