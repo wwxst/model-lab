@@ -41,6 +41,67 @@ py -3.14 -m venv .venv
 .venv\Scripts\python.exe -m pip install -e ".[dev]"
 ```
 
+## 第一次运行训练
+
+先确认 Python、PyTorch 和当前计算设备：
+
+```text
+.venv\Scripts\python.exe scripts\check_environment.py
+```
+
+本地存在 `data/processed/alpaca_zh_chat_1000.txt` 后，执行：
+
+```text
+.venv\Scripts\python.exe scripts\train_chat.py
+```
+
+默认训练使用前 10,000 个字符、1 个 Epoch（完整遍历一次训练数据）、
+64 个字符的 Context Length（上下文长度）和 CPU 或可用的 CUDA 设备。
+训练完成后，模型和 Optimizer 状态保存在 `checkpoints/chat-model.pt`。
+
+再次训练时不要重新执行上面的首次训练命令。使用 `--resume` 读取模型已经
+学到的参数、Optimizer 状态、固定词表和训练配置，再增加指定数量的 Epoch：
+
+```text
+.venv\Scripts\python.exe scripts\train_chat.py --resume checkpoints\chat-model.pt --epochs 5
+```
+
+假如 Checkpoint 已经完成 10 个 Epoch，这条命令会继续完成第 11 至第 15 个
+Epoch。每完成一个 Epoch，更新后的累计训练状态都会保存回同一个文件。
+
+在本功能加入前生成的旧 Checkpoint 没有保存训练配置。第一次继续旧模型时，
+需要明确提供它原来使用的字符数量。例如已有模型使用了前 50,000 个字符：
+
+```text
+.venv\Scripts\python.exe scripts\train_chat.py --resume checkpoints\chat-model.pt --max-characters 50000 --epochs 5
+```
+
+这次继续完成后，Checkpoint 会写入固定词表、模型结构、文本范围和文本指纹；
+以后只需要使用 `--resume` 和本次希望增加的 `--epochs`。
+
+为了避免丢失已有结果，不使用 `--resume` 时，如果输出文件已经存在，脚本会
+停止并提示错误。开始另一个全新模型时应指定不同文件名：
+
+```text
+.venv\Scripts\python.exe scripts\train_chat.py --checkpoint checkpoints\another-model.pt
+```
+
+终端输出中的 `loss` 表示模型预测下一个字符时的平均误差。相同数据和参数下，
+经过更多训练后 loss 总体下降，说明模型正在学习训练文本中的字符关系。
+
+确认最小流程能够运行后，可以从零训练完整文本，并保存为另一个模型：
+
+```text
+.venv\Scripts\python.exe scripts\train_chat.py --data data\processed\alpaca_zh_chat_full.txt --max-characters 0 --epochs 10 --checkpoint checkpoints\chat-full.pt
+```
+
+`--max-characters 0` 表示使用文件中的全部文本。当前字符级模型会为相邻位置
+创建训练窗口，在 CPU 上训练完整数据会明显更慢。运行以下命令可查看全部参数：
+
+```text
+.venv\Scripts\python.exe scripts\train_chat.py --help
+```
+
 ## 项目状态
 
 Autoregressive Generation（自回归生成）。当前已能从 `[B,T]` Token IDs 开始，以 Greedy Decoding（贪心解码）逐步追加 Token，并在超过模型上下文时裁剪输入窗口。详细内容见 [`docs/autoregressive-generation.md`](docs/autoregressive-generation.md)。当前不包含采样策略、KV Cache 或流式输出。
