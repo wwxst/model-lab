@@ -4,7 +4,11 @@ import pytest
 import torch
 from torch.optim import AdamW
 
-from model_lab.checkpoint import load_checkpoint, save_checkpoint
+from model_lab.checkpoint import (
+    load_checkpoint,
+    load_checkpoint_metadata,
+    save_checkpoint,
+)
 from model_lab.decoder_model import DecoderOnlyLanguageModel
 from model_lab.training import train_epoch
 
@@ -141,3 +145,26 @@ def test_load_checkpoint_rejects_missing_fields(tmp_path: Path) -> None:
 
     with pytest.raises(ValueError, match="model_state_dict"):
         load_checkpoint(path, model, optimizer)
+
+
+def test_checkpoint_round_trips_optional_metadata(tmp_path: Path) -> None:
+    model = make_model()
+    optimizer = AdamW(model.parameters(), lr=0.01)
+    path = tmp_path / "checkpoint.pt"
+    metadata: dict[str, object] = {
+        "tokenizer_characters": ["a", "b"],
+        "model": {"embedding_dim": 4},
+    }
+
+    save_checkpoint(path, model, optimizer, epoch=2, metadata=metadata)
+
+    assert load_checkpoint_metadata(path, map_location="cpu") == metadata
+
+
+def test_old_checkpoint_without_metadata_returns_none(tmp_path: Path) -> None:
+    model = make_model()
+    optimizer = AdamW(model.parameters(), lr=0.01)
+    path = tmp_path / "checkpoint.pt"
+    save_checkpoint(path, model, optimizer, epoch=1)
+
+    assert load_checkpoint_metadata(path) is None

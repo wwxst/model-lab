@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 
 import torch
 from torch import nn
@@ -14,8 +15,10 @@ def save_checkpoint(
     model: nn.Module,
     optimizer: Optimizer,
     epoch: int,
+    *,
+    metadata: dict[str, object] | None = None,
 ) -> None:
-    """保存模型参数、优化器状态和已完成的 Epoch 编号。"""
+    """保存模型参数、优化器状态、Epoch 编号和可选训练元数据。"""
 
     if epoch < 0:
         raise ValueError("epoch must not be negative")
@@ -27,7 +30,23 @@ def save_checkpoint(
         "optimizer_state_dict": optimizer.state_dict(),
         "epoch": epoch,
     }
+    if metadata is not None:
+        checkpoint["metadata"] = metadata
     torch.save(checkpoint, Path(path))
+
+
+def load_checkpoint_metadata(
+    path: str | Path,
+    *,
+    map_location: torch.device | str | None = None,
+) -> dict[str, object] | None:
+    """读取可选训练元数据；旧格式 Checkpoint 没有元数据时返回 None。"""
+
+    checkpoint = _read_checkpoint(path, map_location=map_location)
+    metadata = checkpoint.get("metadata")
+    if metadata is not None and not isinstance(metadata, dict):
+        raise ValueError("checkpoint metadata must be a dictionary")
+    return metadata
 
 
 def load_checkpoint(
@@ -38,6 +57,20 @@ def load_checkpoint(
     map_location: torch.device | str | None = None,
 ) -> int:
     """加载 Checkpoint 到已创建的模型和优化器，并返回已完成 Epoch。"""
+
+    checkpoint = _read_checkpoint(path, map_location=map_location)
+
+    model.load_state_dict(checkpoint["model_state_dict"])
+    optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
+    return checkpoint["epoch"]
+
+
+def _read_checkpoint(
+    path: str | Path,
+    *,
+    map_location: torch.device | str | None,
+) -> dict[str, Any]:
+    """读取并验证所有 Checkpoint 入口共同依赖的基础字段。"""
 
     # weights_only=False 是当前项目保存的本地纯 Tensor/标量字典格式所需的
     # 明确加载模式；文件内容由调用者提供，不在这里隐藏加载异常。
@@ -52,7 +85,4 @@ def load_checkpoint(
         raise ValueError("checkpoint must contain epoch")
     if not isinstance(checkpoint["epoch"], int) or checkpoint["epoch"] < 0:
         raise ValueError("checkpoint epoch must be a non-negative integer")
-
-    model.load_state_dict(checkpoint["model_state_dict"])
-    optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
-    return checkpoint["epoch"]
+    return checkpoint
