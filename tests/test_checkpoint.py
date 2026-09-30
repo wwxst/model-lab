@@ -7,6 +7,7 @@ from torch.optim import AdamW
 from model_lab.checkpoint import (
     load_checkpoint,
     load_checkpoint_metadata,
+    load_model_weights,
     save_checkpoint,
 )
 from model_lab.decoder_model import DecoderOnlyLanguageModel
@@ -127,6 +128,28 @@ def test_restored_training_step_matches_source_training_step(tmp_path: Path) -> 
         source_model.parameters(), restored_model.parameters(), strict=True
     ):
         assert torch.equal(source, restored)
+
+
+def test_load_model_weights_restores_predictions_without_optimizer(
+    tmp_path: Path,
+) -> None:
+    source = make_model()
+    optimizer = AdamW(source.parameters(), lr=0.01)
+    batch = make_batch()
+    train_epoch(source, [batch], optimizer, device="cpu")
+    path = tmp_path / "pretrained.pt"
+    save_checkpoint(path, source, optimizer, epoch=7)
+
+    restored = make_model()
+    load_model_weights(path, restored, map_location="cpu")
+
+    for name, value in source.state_dict().items():
+        actual = restored.state_dict()[name]
+        assert torch.equal(value, actual)
+        assert actual.dtype == value.dtype
+        assert actual.device == value.device
+    assert torch.equal(source(batch[0]), restored(batch[0]))
+    assert not AdamW(restored.parameters()).state
 
 
 def test_save_checkpoint_rejects_negative_epoch(tmp_path: Path) -> None:

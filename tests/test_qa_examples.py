@@ -30,3 +30,14 @@ def test_paraphrase_evaluation_questions_are_held_out_and_encodable() -> None:
     for record in test:
         assert record["answer"] in training_answers
         assert set(record["question"]).issubset(training_characters)
+
+
+def test_pretraining_demo_covers_finetuning_characters() -> None:
+    examples = Path(__file__).parents[1] / "examples"
+    pretraining_characters = set(
+        (examples / "pretraining_demo.txt").read_text(encoding="utf-8")
+    )
+    for line in (examples / "qa_basics.jsonl").read_text(encoding="utf-8").splitlines():
+        record = json.loads(line)
+        prompt_and_answer = f"用户：{record['question']}\n助手：{record['answer']}\n\n"
+        assert set(prompt_and_answer).issubset(pretraining_characters)

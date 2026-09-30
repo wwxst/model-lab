@@ -71,6 +71,8 @@ Optimizer            ｜优化器            ｜根据梯度更新模型参数�
 Checkpoint           ｜检查点            ｜训练过程中保存的模型参数及相关状态
 State Dict           ｜状态字典          ｜PyTorch 用于保存模块或优化器状态的键值结构
 Resume Training      ｜恢复训练          ｜从 Checkpoint 加载状态后继续更新参数
+Pretraining          ｜预训练            ｜先用文本预测任务学习参数，作为后续训练的起点
+Fine-tuning          ｜微调              ｜继承已训练的模型参数，在新的训练数据上继续学习
 Map Location         ｜设备映射          ｜加载 Tensor 时指定目标 CPU 或 GPU 设备
 Completed Epoch      ｜已完成轮次        ｜Checkpoint 创建前完整结束的训练轮次数量
 Training             ｜训练              ｜使用数据和损失反复更新模型参数的过程

@@ -151,6 +151,37 @@ Epoch。每完成一个 Epoch，更新后的累计训练状态都会保存回同
 答案判定采用与预期答案完全一致的标准，不能只检查生成内容是否包含几个关键词。
 这个实验只覆盖已有知识点的有限表达，不代表通用聊天能力。
 
+## 先读文本，再用问答微调
+
+`--finetune` 读取已有模型参数和固定词表，用新数据开始训练。它与 `--resume`
+不同：微调会新建 Optimizer，轮次从 1 开始；恢复训练则沿用原数据和训练状态。
+微调必须明确指定新数据和新的输出文件，不会覆盖原模型或其他已有文件。
+
+先用仓库中的小文本演示 Pretraining（预训练）：
+
+```powershell
+.venv\Scripts\python.exe -X utf8 scripts\train_chat.py --data examples\pretraining_demo.txt --max-characters 0 --epochs 3 --context-length 32 --checkpoint checkpoints\pretrained-demo.pt
+```
+
+然后继承这个模型，在问答数据上进行 Fine-tuning（微调）：
+
+```powershell
+.venv\Scripts\python.exe -X utf8 scripts\train_chat.py --finetune checkpoints\pretrained-demo.pt --data-format qa --data examples\qa_basics.jsonl --epochs 200 --learning-rate 0.003 --batch-size 16 --checkpoint checkpoints\qa-finetuned-demo.pt
+```
+
+训练后提问：
+
+```powershell
+.venv\Scripts\python.exe -X utf8 scripts\ask_chat.py --checkpoint checkpoints\qa-finetuned-demo.pt
+```
+
+中断微调后用 `--resume checkpoints\qa-finetuned-demo.pt --epochs 20` 接着训练，
+不要再次执行 `--finetune`，否则会重新从原模型开始。
+这组小数据仅演示两阶段训练流程，不代表预训练改善了问答能力或具备通用聊天能力。
+当前微调保持原词表和模型结构，不支持新字符；新数据的字符必须已被原词表覆盖。
+数据准备、参数继承和验收边界见
+[`docs/question-answer-training.md`](docs/question-answer-training.md)。
+
 ## 项目状态
 
 Autoregressive Generation（自回归生成）。当前已能从 `[B,T]` Token IDs 开始，以 Greedy Decoding（贪心解码）逐步追加 Token，并在超过模型上下文时裁剪输入窗口。详细内容见 [`docs/autoregressive-generation.md`](docs/autoregressive-generation.md)。当前不包含采样策略、KV Cache 或流式输出。

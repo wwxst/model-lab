@@ -65,6 +65,18 @@ def load_checkpoint(
     return checkpoint["epoch"]
 
 
+def load_model_weights(
+    path: str | Path,
+    model: nn.Module,
+    *,
+    map_location: torch.device | str | None = None,
+) -> None:
+    """只加载模型参数，用于在新数据上开始微调，不恢复优化器或轮次。"""
+
+    checkpoint = _read_checkpoint(path, map_location=map_location)
+    model.load_state_dict(checkpoint["model_state_dict"])
+
+
 def _read_checkpoint(
     path: str | Path,
     *,

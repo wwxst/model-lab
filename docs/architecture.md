@@ -90,3 +90,8 @@ Autoregressive Generation 已能在 `torch.no_grad()` 下逐步读取最后位�
 训练入口将数据模式、固定词表、模型配置和文本指纹写入 Checkpoint 元数据。
 终端提问入口读取保存的词表和配置，调用现有模型与贪心生成函数。
 问答样本的数学过程见 [`question-answer-training.md`](question-answer-training.md)。
+
+训练初始化有三个入口：新模型使用随机参数；`--resume` 恢复模型、Optimizer 和
+轮次并核对原数据指纹；`--finetune` 沿用保存的模型结构和词表，通过
+`load_model_weights` 只加载模型参数，再创建新的 Optimizer，用新数据从第 1 轮
+开始训练。微调结果写入新 Checkpoint，记录当前数据配置，可独立恢复训练。
