@@ -1,0 +1,622 @@
+{
+  "created_at_utc": "2026-10-01T03:32:40.187470+00:00",
+  "license": {
+    "url": "https://creativecommons.org/licenses/by-sa/4.0/deed.zh",
+    "text": "Creative Commons Attribution-Share Alike 4.0"
+  },
+  "source_api": "https://zh.wikipedia.org/w/api.php",
+  "facts_sha256": "79e8d0d236f9d325e508ec52df79a9355961091855c3fd1eabd734af20236ed9",
+  "original_content": "Model Lab AI-assisted teaching notes and questions, reviewed against the listed concepts; not copied QA pairs.",
+  "selection": "NFC plaintext, remove line-end whitespace, omit trailing references, headings and paragraphs containing LaTeX displaystyle commands; unique whole paragraphs selected round-robin until about 100000 characters.",
+  "characters": 100175,
+  "vocabulary_size": 2472,
+  "knowledge_points": 50,
+  "training_records": 200,
+  "test_records": 50,
+  "test_unknown_characters": [],
+  "files_sha256": {
+    "pretraining.txt": "dd0f23a88e2cae217e9c2471ba9fe6db8a0e6ac66c3cd7dc1f5c4c298508a1a9",
+    "qa_train.jsonl": "ea81eaf6afcb30e6b822880b91fbf7d03215a24959b1574e336628ca06518dc4",
+    "qa_test.jsonl": "be9b4a64d4183333777a95e74b3f6cf070887da2a0f5aed7368a9fb3c18a46cb"
+  },
+  "articles": [
+    {
+      "title": "三角形",
+      "page_id": 8010,
+      "requested_titles": [
+        "三角形"
+      ],
+      "revision_id": 90763988,
+      "revision_timestamp": "2025-12-20T04:24:21Z",
+      "url": "https://zh.wikipedia.org/wiki/%E4%B8%89%E8%A7%92%E5%BD%A2",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=90763988",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=8010&action=history",
+      "extract_sha256": "1e9a3ebaba8f3b44309f09587a77edc2e361ec2d4d27a269f22bd6bf59ac5b55",
+      "excluded_paragraphs": [],
+      "selected_characters": 130,
+      "selected_sha256": "7487d2ae0190051107b5d6a1fd2842df5461c6cfc9a217d62784deb24b46ad77"
+    },
+    {
+      "title": "中华人民共和国",
+      "page_id": 118,
+      "requested_titles": [
+        "中华人民共和国"
+      ],
+      "revision_id": 94606074,
+      "revision_timestamp": "2026-09-27T12:33:07Z",
+      "url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E5%8D%8E%E4%BA%BA%E6%B0%91%E5%85%B1%E5%92%8C%E5%9B%BD",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94606074",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=118&action=history",
+      "extract_sha256": "15f2f265d18280b22db5704003ef75f5d4a6f1108f139841bcc08a8f42c66df6",
+      "excluded_paragraphs": [],
+      "selected_characters": 7448,
+      "selected_sha256": "3421a92a59bcc2d3e294a43154a1c11ee0fba72cf5aa7f55ecc8c529666de098"
+    },
+    {
+      "title": "乘法",
+      "page_id": 50155,
+      "requested_titles": [
+        "乘法"
+      ],
+      "revision_id": 94618682,
+      "revision_timestamp": "2026-09-28T05:37:19Z",
+      "url": "https://zh.wikipedia.org/wiki/%E4%B9%98%E6%B3%95",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94618682",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=50155&action=history",
+      "extract_sha256": "2e76f90bc58f59830137bb104fa8b39c4c87eac828a4b871a3d83178339b285e",
+      "excluded_paragraphs": [],
+      "selected_characters": 262,
+      "selected_sha256": "d4cfcc2a1d04f3c5e57e64d96ed7bf390b0bb474eb4c3b8733d40487df4469ab"
+    },
+    {
+      "title": "二氧化碳",
+      "page_id": 46313,
+      "requested_titles": [
+        "二氧化碳"
+      ],
+      "revision_id": 93309256,
+      "revision_timestamp": "2026-07-04T03:38:13Z",
+      "url": "https://zh.wikipedia.org/wiki/%E4%BA%8C%E6%B0%A7%E5%8C%96%E7%A2%B3",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=93309256",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=46313&action=history",
+      "extract_sha256": "0bc858155b84566b90ee6dccdbd6e604210ed280320d4c2db1e163da873ac5a2",
+      "excluded_paragraphs": [],
+      "selected_characters": 1477,
+      "selected_sha256": "da9564217b3ff6d64db86ec65239b972cfe9df0d5710d28ba54f0d7e8bdb65e5"
+    },
+    {
+      "title": "亚洲",
+      "page_id": 471,
+      "requested_titles": [
+        "亚洲"
+      ],
+      "revision_id": 94227473,
+      "revision_timestamp": "2026-09-07T05:52:59Z",
+      "url": "https://zh.wikipedia.org/wiki/%E4%BA%9A%E6%B4%B2",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94227473",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=471&action=history",
+      "extract_sha256": "badf48f688bf64bd53defe8a7d4b2bcb599e977169505165469d83b6bb75a72f",
+      "excluded_paragraphs": [],
+      "selected_characters": 7257,
+      "selected_sha256": "79afd093d5649a40f6d9ef10328880259c0ff3a7d1d409a3bdbdad0b3d459af8"
+    },
+    {
+      "title": "奇偶性 (数学)",
+      "page_id": 49131,
+      "requested_titles": [
+        "偶数",
+        "奇数"
+      ],
+      "revision_id": 92123705,
+      "revision_timestamp": "2026-04-01T09:24:32Z",
+      "url": "https://zh.wikipedia.org/wiki/%E5%A5%87%E5%81%B6%E6%80%A7_(%E6%95%B0%E5%AD%A6)",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=92123705",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=49131&action=history",
+      "extract_sha256": "a7877e44575c2ae4d169aa71dea638e4df448f0435c6fc15cd14096d9c31b8d0",
+      "excluded_paragraphs": [],
+      "selected_characters": 202,
+      "selected_sha256": "18ce3aa6cc1ebeafd45922e8728d3a76c8e345aafc93249d2b8e8681f67dba09"
+    },
+    {
+      "title": "光合作用",
+      "page_id": 9915,
+      "requested_titles": [
+        "光合作用"
+      ],
+      "revision_id": 94441383,
+      "revision_timestamp": "2026-09-19T11:56:41Z",
+      "url": "https://zh.wikipedia.org/wiki/%E5%85%89%E5%90%88%E4%BD%9C%E7%94%A8",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94441383",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=9915&action=history",
+      "extract_sha256": "a1673d2c730494b36c30639ef9aeb8c65b96b391d960588ab62db2b17aa6c9bd",
+      "excluded_paragraphs": [],
+      "selected_characters": 2333,
+      "selected_sha256": "a8a317362559b944386dd9f9b65220fd845bd27716f7a82073a18802789d6a86"
+    },
+    {
+      "title": "減法",
+      "page_id": 48434,
+      "requested_titles": [
+        "减法"
+      ],
+      "revision_id": 94615337,
+      "revision_timestamp": "2026-09-28T01:32:22Z",
+      "url": "https://zh.wikipedia.org/wiki/%E6%B8%9B%E6%B3%95",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94615337",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=48434&action=history",
+      "extract_sha256": "25e3369ecf1f33d92d635468eb51031dccbc093e80377681ce6baf6587d6dcbb",
+      "excluded_paragraphs": [],
+      "selected_characters": 244,
+      "selected_sha256": "bf9f4b2f643752e80a40131f39e5f4f01c82b10c4a22118ebbde71a9df1b4fff"
+    },
+    {
+      "title": "凝固",
+      "page_id": 1016857,
+      "requested_titles": [
+        "凝固"
+      ],
+      "revision_id": 91409664,
+      "revision_timestamp": "2026-02-05T16:13:32Z",
+      "url": "https://zh.wikipedia.org/wiki/%E5%87%9D%E5%9B%BA",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=91409664",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=1016857&action=history",
+      "extract_sha256": "e5846c229087d0bc1f94052b4897619de4c211de550d3e72a65936c4048ac3f0",
+      "excluded_paragraphs": [],
+      "selected_characters": 1933,
+      "selected_sha256": "c6e8b626b4dcf003fe6fd49884759160a4a47a6b7e523445ea6b1862825485a1"
+    },
+    {
+      "title": "分钟",
+      "page_id": 26011,
+      "requested_titles": [
+        "分钟"
+      ],
+      "revision_id": 93761858,
+      "revision_timestamp": "2026-08-04T01:38:43Z",
+      "url": "https://zh.wikipedia.org/wiki/%E5%88%86%E9%92%9F",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=93761858",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=26011&action=history",
+      "extract_sha256": "d9e96d8db9786d13abb2911d9de011cf638c45deada17ba913321a0cfabb30ea",
+      "excluded_paragraphs": [],
+      "selected_characters": 125,
+      "selected_sha256": "dc0735f14f3b286340712bf8d06f699e157e87ce23408d346af789b8cc4c6fa7"
+    },
+    {
+      "title": "加法",
+      "page_id": 48433,
+      "requested_titles": [
+        "加法"
+      ],
+      "revision_id": 94213686,
+      "revision_timestamp": "2026-09-06T06:18:16Z",
+      "url": "https://zh.wikipedia.org/wiki/%E5%8A%A0%E6%B3%95",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94213686",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=48433&action=history",
+      "extract_sha256": "9e71770dfbf811ebcf6b327ca7b7fce62e323386a8447e61a296fa03999c7847",
+      "excluded_paragraphs": [],
+      "selected_characters": 846,
+      "selected_sha256": "1ecf49b60a73590457b3af5ae25a7e47d415b72534b968400756f8d90085ba9c"
+    },
+    {
+      "title": "北京市",
+      "page_id": 463,
+      "requested_titles": [
+        "北京"
+      ],
+      "revision_id": 94264404,
+      "revision_timestamp": "2026-09-09T14:30:26Z",
+      "url": "https://zh.wikipedia.org/wiki/%E5%8C%97%E4%BA%AC%E5%B8%82",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94264404",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=463&action=history",
+      "extract_sha256": "7ef3eed645dc0e86e6b353e67f55bf1c833b275e6b9a0cfccbe7d690670711e4",
+      "excluded_paragraphs": [],
+      "selected_characters": 5983,
+      "selected_sha256": "8b7d2d79f0aef3588e280ba385cad16b07120322311e167aa9e2d6cecc37d520"
+    },
+    {
+      "title": "千克",
+      "page_id": 21707,
+      "requested_titles": [
+        "千克"
+      ],
+      "revision_id": 93860054,
+      "revision_timestamp": "2026-08-12T05:39:50Z",
+      "url": "https://zh.wikipedia.org/wiki/%E5%8D%83%E5%85%8B",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=93860054",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=21707&action=history",
+      "extract_sha256": "29f4f48e1314b1f9a893730b9e5f8b67c0cf71632a24ed6bcefa68ee74e898c5",
+      "excluded_paragraphs": [],
+      "selected_characters": 2694,
+      "selected_sha256": "18b3419357a719bd70c574e12ef8092bdd0ffb8b8ac807b99ee2ead920920552"
+    },
+    {
+      "title": "呼吸作用",
+      "page_id": 123442,
+      "requested_titles": [
+        "呼吸作用"
+      ],
+      "revision_id": 94328666,
+      "revision_timestamp": "2026-09-13T02:51:06Z",
+      "url": "https://zh.wikipedia.org/wiki/%E5%91%BC%E5%90%B8%E4%BD%9C%E7%94%A8",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94328666",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=123442&action=history",
+      "extract_sha256": "cd67099e28310c22c57b47db997401ce8c65d5ea98bd5e13ef236fce3b73db2e",
+      "excluded_paragraphs": [],
+      "selected_characters": 2926,
+      "selected_sha256": "6b26f3609520acaf01e0209346be34fe0f6fc3187e8e933cd4673eb0ac338eee"
+    },
+    {
+      "title": "季节",
+      "page_id": 42690,
+      "requested_titles": [
+        "四季"
+      ],
+      "revision_id": 94641577,
+      "revision_timestamp": "2026-09-29T11:00:32Z",
+      "url": "https://zh.wikipedia.org/wiki/%E5%AD%A3%E8%8A%82",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94641577",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=42690&action=history",
+      "extract_sha256": "1e8689f0c1e635fa76af8ea91cbd79aae4e145b1135758bf9f362676d078445a",
+      "excluded_paragraphs": [],
+      "selected_characters": 3177,
+      "selected_sha256": "41c7d661b0793b76cb9990ef22da86f6e3c2b3ab7da82c213a70a12c738f57dc"
+    },
+    {
+      "title": "圆",
+      "page_id": 10608,
+      "requested_titles": [
+        "圆"
+      ],
+      "revision_id": 93607017,
+      "revision_timestamp": "2026-07-22T12:48:42Z",
+      "url": "https://zh.wikipedia.org/wiki/%E5%9C%86",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=93607017",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=10608&action=history",
+      "extract_sha256": "f351a5f115d5ea2169984d7a72f048886407d2b7d20edeffdd6e0f43bdac901a",
+      "excluded_paragraphs": [],
+      "selected_characters": 594,
+      "selected_sha256": "69b5d27c6dd7ed214c67dc1f507efff1bfe6f7df31d8d60641c030ff3ec99638"
+    },
+    {
+      "title": "地球",
+      "page_id": 5414300,
+      "requested_titles": [
+        "地球"
+      ],
+      "revision_id": 94652406,
+      "revision_timestamp": "2026-09-29T21:06:23Z",
+      "url": "https://zh.wikipedia.org/wiki/%E5%9C%B0%E7%90%83",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94652406",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=5414300&action=history",
+      "extract_sha256": "da7a314a8d240e590fed2a0fe8a61f0eee14da19cfce9ed514a404dce36190cf",
+      "excluded_paragraphs": [],
+      "selected_characters": 8507,
+      "selected_sha256": "126b5a0b88c928d3cb591333b0809fb311a97fea5c8b8107a2f8cdfe8049046b"
+    },
+    {
+      "title": "地球公转",
+      "page_id": 206238,
+      "requested_titles": [
+        "地球公转"
+      ],
+      "revision_id": 82712972,
+      "revision_timestamp": "2024-05-20T12:38:22Z",
+      "url": "https://zh.wikipedia.org/wiki/%E5%9C%B0%E7%90%83%E5%85%AC%E8%BD%AC",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=82712972",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=206238&action=history",
+      "extract_sha256": "b33265b26e168c4ae6106fe8c0b4f505d4c5828365fc423a5e333f768b994ac6",
+      "excluded_paragraphs": [],
+      "selected_characters": 978,
+      "selected_sha256": "ca83ec1c3dfb4e52d618eff74219078c4de4ae43fb391ce7038bc7409cdfaa37"
+    },
+    {
+      "title": "地球自转",
+      "page_id": 108048,
+      "requested_titles": [
+        "地球自转"
+      ],
+      "revision_id": 93578250,
+      "revision_timestamp": "2026-07-21T05:30:30Z",
+      "url": "https://zh.wikipedia.org/wiki/%E5%9C%B0%E7%90%83%E8%87%AA%E8%BD%AC",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=93578250",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=108048&action=history",
+      "extract_sha256": "98c8091cae4b8816a68ac2da59c152476f452a2e23bac19f07195f30d1be2fe5",
+      "excluded_paragraphs": [],
+      "selected_characters": 4534,
+      "selected_sha256": "ad095bdf0a0d5ddddda36eebb6169976beaf0802857921d537d3d77b11b42b42"
+    },
+    {
+      "title": "太平洋",
+      "page_id": 3441,
+      "requested_titles": [
+        "太平洋"
+      ],
+      "revision_id": 94148373,
+      "revision_timestamp": "2026-09-02T01:18:27Z",
+      "url": "https://zh.wikipedia.org/wiki/%E5%A4%AA%E5%B9%B3%E6%B4%8B",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94148373",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=3441&action=history",
+      "extract_sha256": "51a23f1e0e9dbda9329c1e892d65616e646430a40e40337844904c291e9f6296",
+      "excluded_paragraphs": [],
+      "selected_characters": 1899,
+      "selected_sha256": "6ba00a7f0279d9f97e01185913101c84afc57db04e98989f87d93b4d396119bd"
+    },
+    {
+      "title": "太阳",
+      "page_id": 4471,
+      "requested_titles": [
+        "太阳"
+      ],
+      "revision_id": 94163705,
+      "revision_timestamp": "2026-09-02T19:58:33Z",
+      "url": "https://zh.wikipedia.org/wiki/%E5%A4%AA%E9%98%B3",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94163705",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=4471&action=history",
+      "extract_sha256": "f251527432000e8341c66124db60c3e7640c459a4c6c8823a2ff58ed9ec9cefd",
+      "excluded_paragraphs": [],
+      "selected_characters": 5608,
+      "selected_sha256": "ae67da7ef3639a4963a8a2631a85aa5f74d17674553f5dc88250e38d04f2d45f"
+    },
+    {
+      "title": "太阳系",
+      "page_id": 2315,
+      "requested_titles": [
+        "太阳系"
+      ],
+      "revision_id": 94643978,
+      "revision_timestamp": "2026-09-29T12:49:22Z",
+      "url": "https://zh.wikipedia.org/wiki/%E5%A4%AA%E9%98%B3%E7%B3%BB",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94643978",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=2315&action=history",
+      "extract_sha256": "3c7e300213a3246256265b0ffad7fece4a51f551385c37e3d2674597b41613c3",
+      "excluded_paragraphs": [],
+      "selected_characters": 5920,
+      "selected_sha256": "1bbfe3a37f9e5c6b8de5ce0b8dd53021adfb624e04c47441cd95505dd30b8eda"
+    },
+    {
+      "title": "月球",
+      "page_id": 3376,
+      "requested_titles": [
+        "月球"
+      ],
+      "revision_id": 94648323,
+      "revision_timestamp": "2026-09-29T16:17:50Z",
+      "url": "https://zh.wikipedia.org/wiki/%E6%9C%88%E7%90%83",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94648323",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=3376&action=history",
+      "extract_sha256": "ed4ca67c2662d7c6f324d63ab9000531f8f87a86b1675314b56175eb80586979",
+      "excluded_paragraphs": [],
+      "selected_characters": 5972,
+      "selected_sha256": "fb1d0524f2120105ca88cbea86e71c30d53ae2f5d2e7a62cdef7f95291793436"
+    },
+    {
+      "title": "正方形",
+      "page_id": 34619,
+      "requested_titles": [
+        "正方形"
+      ],
+      "revision_id": 88602785,
+      "revision_timestamp": "2025-08-05T14:30:17Z",
+      "url": "https://zh.wikipedia.org/wiki/%E6%AD%A3%E6%96%B9%E5%BD%A2",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=88602785",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=34619&action=history",
+      "extract_sha256": "98741156febfd220c346b4c993e7b1b607cf5f97fc896e6baece28b5c8045c4c",
+      "excluded_paragraphs": [],
+      "selected_characters": 311,
+      "selected_sha256": "2949a8ad982fb482252ddf9af1bce4592c48457cda37f2d437a63ee5c2ecbac3"
+    },
+    {
+      "title": "氢",
+      "page_id": 664,
+      "requested_titles": [
+        "氢"
+      ],
+      "revision_id": 93418637,
+      "revision_timestamp": "2026-07-11T12:05:40Z",
+      "url": "https://zh.wikipedia.org/wiki/%E6%B0%A2",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=93418637",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=664&action=history",
+      "extract_sha256": "ae7be323fa4b1fd37d2e0d6f6beb4adf7bb7dd8b6b5a3af79d96f8b8498d399b",
+      "excluded_paragraphs": [],
+      "selected_characters": 988,
+      "selected_sha256": "fb27b06b1e47d68e5dba1d4558f17e8fb81d5e6a2bb0e14ac023b62982a80390"
+    },
+    {
+      "title": "氧气",
+      "page_id": 58153,
+      "requested_titles": [
+        "氧气"
+      ],
+      "revision_id": 91407128,
+      "revision_timestamp": "2026-02-05T12:29:00Z",
+      "url": "https://zh.wikipedia.org/wiki/%E6%B0%A7%E6%B0%94",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=91407128",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=58153&action=history",
+      "extract_sha256": "b4aff3d987051f755faa07cec5344095468fb8ab5f982338a08d51dbc9a78069",
+      "excluded_paragraphs": [],
+      "selected_characters": 2141,
+      "selected_sha256": "b6cdf1e7470dfa5507f9072354358a0f846f497496d684be28bd6e7e52c48673"
+    },
+    {
+      "title": "水",
+      "page_id": 3449,
+      "requested_titles": [
+        "水"
+      ],
+      "revision_id": 94355669,
+      "revision_timestamp": "2026-09-14T10:56:09Z",
+      "url": "https://zh.wikipedia.org/wiki/%E6%B0%B4",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94355669",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=3449&action=history",
+      "extract_sha256": "85748e66fd4fa1490630b6d6d18aef0fd92b4e76b1945ea9e73bf7d3127f0bab",
+      "excluded_paragraphs": [
+        {
+          "sha256": "c5f47265d0fe6c773ac9e0492ecceb49f7c22313eb891ae68520bd114996ed3c",
+          "reason": "Contains Earth water coverage 75%~78%, inconsistent with the Earth article's ocean coverage of about 71%."
+        }
+      ],
+      "selected_characters": 1090,
+      "selected_sha256": "953d6246ede1e392763ccdb1c9218be49b0478e5e6f40bc8244c9392e601cc4e"
+    },
+    {
+      "title": "水循环",
+      "page_id": 506891,
+      "requested_titles": [
+        "水循环"
+      ],
+      "revision_id": 93586144,
+      "revision_timestamp": "2026-07-21T10:12:34Z",
+      "url": "https://zh.wikipedia.org/wiki/%E6%B0%B4%E5%BE%AA%E7%8E%AF",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=93586144",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=506891&action=history",
+      "extract_sha256": "422e51c544b6889fa715a6b9b1decbf72018bc4cccc64e72d00511841b6809bb",
+      "excluded_paragraphs": [],
+      "selected_characters": 4135,
+      "selected_sha256": "81eada0eceba66fbf2b22f3e8c5f99062d452dde2cd45a284815b0977fe03307"
+    },
+    {
+      "title": "熔化",
+      "page_id": 719366,
+      "requested_titles": [
+        "熔化"
+      ],
+      "revision_id": 94666281,
+      "revision_timestamp": "2026-09-30T11:51:17Z",
+      "url": "https://zh.wikipedia.org/wiki/%E7%86%94%E5%8C%96",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94666281",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=719366&action=history",
+      "extract_sha256": "776cec0cdcdf98ef8f23f9a869d14477a92f68d6497112d6134f444427b94f80",
+      "excluded_paragraphs": [],
+      "selected_characters": 1407,
+      "selected_sha256": "34fd0c0c200cf82d0712b00faa71cc2bf77a2cc1aab569814e6dcdb6a2d399f8"
+    },
+    {
+      "title": "栽培稻",
+      "page_id": 7402806,
+      "requested_titles": [
+        "米"
+      ],
+      "revision_id": 93534339,
+      "revision_timestamp": "2026-07-18T14:33:40Z",
+      "url": "https://zh.wikipedia.org/wiki/%E6%A0%BD%E5%9F%B9%E7%A8%BB",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=93534339",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=7402806&action=history",
+      "extract_sha256": "9c3b1b0e0cb76438e5b63d431c2f54103de0b0d0094b26af117f319615c8f9b8",
+      "excluded_paragraphs": [],
+      "selected_characters": 1446,
+      "selected_sha256": "cd8d9db4ed58a92d8709b068a33bef00d85895d4b2437c283ab72b127e3f1b17"
+    },
+    {
+      "title": "蒸发",
+      "page_id": 34980,
+      "requested_titles": [
+        "蒸发"
+      ],
+      "revision_id": 88278185,
+      "revision_timestamp": "2025-07-15T01:30:06Z",
+      "url": "https://zh.wikipedia.org/wiki/%E8%92%B8%E5%8F%91",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=88278185",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=34980&action=history",
+      "extract_sha256": "423e5994cb301b47cd85df76725244a5b675227cc79b49c0d9562c9fd8eb8ef2",
+      "excluded_paragraphs": [],
+      "selected_characters": 658,
+      "selected_sha256": "2455839efdf8b2195bd252b17336a828ff356ea0ae746ec3486ca8c1f7ee84dd"
+    },
+    {
+      "title": "质数",
+      "page_id": 17187,
+      "requested_titles": [
+        "质数"
+      ],
+      "revision_id": 94257959,
+      "revision_timestamp": "2026-09-09T07:09:33Z",
+      "url": "https://zh.wikipedia.org/wiki/%E8%B4%A8%E6%95%B0",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94257959",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=17187&action=history",
+      "extract_sha256": "e645febfcaf1d8f0175d7814bc460766da551fb91cfc2f5cedb6feb8b09e6671",
+      "excluded_paragraphs": [],
+      "selected_characters": 933,
+      "selected_sha256": "521cc1ff3e81cf9b6db3ba42a51ea1ccb045e4f89a1e9ee8d95bf8ba14d80500"
+    },
+    {
+      "title": "赤道",
+      "page_id": 32003,
+      "requested_titles": [
+        "赤道"
+      ],
+      "revision_id": 94641425,
+      "revision_timestamp": "2026-09-29T10:51:14Z",
+      "url": "https://zh.wikipedia.org/wiki/%E8%B5%A4%E9%81%93",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94641425",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=32003&action=history",
+      "extract_sha256": "2ae982b28d975689364a145eb239cef8ae02aaeee847482085526c53ebd30fb5",
+      "excluded_paragraphs": [],
+      "selected_characters": 1561,
+      "selected_sha256": "9e1014c72569a2a95d5463c67a821337a3706b418289e9ce1e32b6cd89b9ccd5"
+    },
+    {
+      "title": "矩形",
+      "page_id": 20895,
+      "requested_titles": [
+        "长方形"
+      ],
+      "revision_id": 89628434,
+      "revision_timestamp": "2025-10-22T13:40:28Z",
+      "url": "https://zh.wikipedia.org/wiki/%E7%9F%A9%E5%BD%A2",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=89628434",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=20895&action=history",
+      "extract_sha256": "ebd06487f039aee0c2a3186ea193f04696a672712fa4154162a38b7ac6d2eecf",
+      "excluded_paragraphs": [],
+      "selected_characters": 390,
+      "selected_sha256": "0484c56e6985ed55c9989d44e97182200cff0abcd2e0224a22d8cdb299c49ede"
+    },
+    {
+      "title": "长江",
+      "page_id": 1439,
+      "requested_titles": [
+        "长江"
+      ],
+      "revision_id": 94386981,
+      "revision_timestamp": "2026-09-16T07:39:21Z",
+      "url": "https://zh.wikipedia.org/wiki/%E9%95%BF%E6%B1%9F",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94386981",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=1439&action=history",
+      "extract_sha256": "0480bb02578360ab5f758a0d2d782f53a8753c98b40f36af1ae88ce2217880fd",
+      "excluded_paragraphs": [],
+      "selected_characters": 5678,
+      "selected_sha256": "f2772c0b01dbb12e193a32d497f58954193c30785aa38a6fe475c5e1f7cf34ce"
+    },
+    {
+      "title": "除法",
+      "page_id": 70258,
+      "requested_titles": [
+        "除法"
+      ],
+      "revision_id": 92731412,
+      "revision_timestamp": "2026-05-20T17:01:12Z",
+      "url": "https://zh.wikipedia.org/wiki/%E9%99%A4%E6%B3%95",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=92731412",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=70258&action=history",
+      "extract_sha256": "af17e1a91f9356006ec3bcda3c1b13fbe90989e5e2f2373bc6cf9764f557f723",
+      "excluded_paragraphs": [],
+      "selected_characters": 277,
+      "selected_sha256": "7079b8c11b27dcca9e868e48c8dd578af650b838f8e8a294bf0a65c7d3b042c5"
+    },
+    {
+      "title": "黄河",
+      "page_id": 1443,
+      "requested_titles": [
+        "黄河"
+      ],
+      "revision_id": 94359222,
+      "revision_timestamp": "2026-09-14T15:17:25Z",
+      "url": "https://zh.wikipedia.org/wiki/%E9%BB%84%E6%B2%B3",
+      "revision_url": "https://zh.wikipedia.org/w/index.php?oldid=94359222",
+      "history_url": "https://zh.wikipedia.org/w/index.php?curid=1443&action=history",
+      "extract_sha256": "3b1f090a6519237472de66ca78c381d721275884559501cbfd529fdf2d348a2d",
+      "excluded_paragraphs": [],
+      "selected_characters": 5335,
+      "selected_sha256": "ca71786fe6aafbcb4a5ac04011b84efaa1c30abc3f3db0ba2bdd9054d318ed27"
+    }
+  ]
+}
