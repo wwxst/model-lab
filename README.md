@@ -182,6 +182,13 @@ Epoch。每完成一个 Epoch，更新后的累计训练状态都会保存回同
 数据准备、参数继承和验收边界见
 [`docs/question-answer-training.md`](docs/question-answer-training.md)。
 
+## 基础知识学习材料
+
+[`examples/foundation/`](examples/foundation/README.md) 提供约10万字符的预训练
+文本、200条问答训练题和50条独立测试题，覆盖50个基础知识点。
+来源、许可、分集方式和离线检查命令见数据包说明。测试题只用于检查结果，
+不能放入训练数据；这个数据包本身不代表模型已经学会这些知识。
+
 ## 项目状态
 
 Autoregressive Generation（自回归生成）。当前已能从 `[B,T]` Token IDs 开始，以 Greedy Decoding（贪心解码）逐步追加 Token，并在超过模型上下文时裁剪输入窗口。详细内容见 [`docs/autoregressive-generation.md`](docs/autoregressive-generation.md)。当前不包含采样策略、KV Cache 或流式输出。
