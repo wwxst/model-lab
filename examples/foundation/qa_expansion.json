@@ -1,0 +1,22 @@
+{
+  "license_url": "https://creativecommons.org/licenses/by-sa/4.0/deed.zh",
+  "provenance": "Model Lab AI-assisted original question paraphrases for all 50 existing facts; answers and source attribution remain in facts.json and sources.json. No model training or test-answer evaluation.",
+  "knowledge_points": 50,
+  "base_training_records": 200,
+  "additional_training_records": 300,
+  "training_records": 500,
+  "questions_per_fact": 10,
+  "vocabulary_source": "pretraining.txt",
+  "vocabulary_size": 2472,
+  "inputs_sha256": {
+    "facts.json": "79e8d0d236f9d325e508ec52df79a9355961091855c3fd1eabd734af20236ed9",
+    "qa_train.jsonl": "ea81eaf6afcb30e6b822880b91fbf7d03215a24959b1574e336628ca06518dc4",
+    "qa_test.jsonl": "be9b4a64d4183333777a95e74b3f6cf070887da2a0f5aed7368a9fb3c18a46cb",
+    "pretraining.txt": "dd0f23a88e2cae217e9c2471ba9fe6db8a0e6ac66c3cd7dc1f5c4c298508a1a9",
+    "sources.json": "0c90dbb1d23c547448a7da1be4b59a143bbedb840f4fa9884b0217e5340efb17",
+    "extra_train_questions.json": "0b9b3b08191be0653919e86d0477486f41bcc9dea86506972fc2453e56a8bbc8"
+  },
+  "files_sha256": {
+    "qa_train_expanded.jsonl": "c5ec8d5671a7c8c6095a29b1393f99a908555d595767e70af3810ee47ef3cd0c"
+  }
+}
